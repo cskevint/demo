@@ -104,18 +104,6 @@ Ext.ns("C3.PEAT.ux.Graph");
     Graph.chart = {};
     Graph.data = {};
     
-    var colors = ["url(#v-1)","url(#v-2)","url(#v-3)","url(#v-4)","url(#v-5)"];
-
-    Ext.define("Ext.chart.theme.Annual", {
-        extend: "Ext.chart.theme.Base",
-
-        constructor: function(config) {
-            this.callParent([Ext.apply({
-                colors: colors
-            }, config)]);
-        }
-    });
-
     Graph.data.annual = new Ext.data.JsonStore({
         fields: ["name", "data"],
         data: [
@@ -128,78 +116,66 @@ Ext.ns("C3.PEAT.ux.Graph");
 
     Graph.chart.annual = new Ext.chart.Chart({
         style: "background:#fff",
-        theme: "Annual",
-        animate: true,
+//        animate: true,
         store: Graph.data.annual,
         shadow: true,
-        gradients: [{
-            id: "v-1",
-            angle: 0,
-            stops: {
-                0: {color: "rgb(212, 40, 40)"},
-                100: {color: "rgb(117, 14, 14)"}
-            }
-        },{
-            id: "v-2",
-            angle: 0,
-            stops: {
-                0: {color: "rgb(180, 216, 42)"},
-                100: {color: "rgb(94, 114, 13)"}
-            }
-        },{
-            id: "v-3",
-            angle: 0,
-            stops: {
-                0: {color: "rgb(43, 221, 115)"},
-                100: {color: "rgb(14, 117, 56)"}
-            }
-        },{
-            id: "v-4",
-            angle: 0,
-            stops: {
-                0: {color: "rgb(45, 117, 226)"},
-                100: {color: "rgb(14, 56, 117)"}
-            }
-        },{
-            id: "v-5",
-            angle: 0,
-            stops: {
-                0: {color: "rgb(187, 45, 222)"},
-                100: {color: "rgb(85, 10, 103)"}
-            }
-        }],
         axes: [{
             type: "Numeric",
             minimum: 0,
-//        maximum: 100,
+            maximum: 100,
             position: "left",
             fields: ["data"],
             title: "Dollars",
-            minorTickSteps: 1,
             grid: true
-        }, {
+        },{
             type: "Category",
             position: "bottom",
             fields: ["name"]
         }],
         series: [{
             type: "column",
-            highlight: {
-                size: 7,
-                radius: 7
-            },
             axis: "left",
             xField: "name",
             yField: "data",
-            showMarkers : false,
-            markerConfig: {
-                type: "cross",
-                size: 4,
-                radius: 4,
-                'stroke-width': 0
+            label: {
+                display: 'outside',
+                'text-anchor': 'middle',
+                field: 'data',
+                renderer: Ext.util.Format.numberRenderer('$0'),
+                orientation: 'horizontal',
+                color: '#333'
             },
             renderer: function(sprite, storeItem, barAttr, i, store) {
-                barAttr.fill = colors[i % colors.length];
+                var fill;
+                if(store.data.items.length > 3) {
+                    switch(i) {
+                        case 0:
+                            fill = "red";
+                            break;
+                        case 1:
+                            fill = "red";
+                            break;
+                        case 2:
+                            fill = "green";
+                            break;
+                        case 3:
+                            fill = "gray";
+                    }
+                } else {
+                    switch(i) {
+                        case 0:
+                            fill = "red";
+                            break;
+                        case 1:
+                            fill = "green";
+                            break;
+                        case 2:
+                            fill = "gray";
+                    }
+                }
+                barAttr.fill = fill;
+//                barAttr.x += parseInt(barAttr.width)/2-25;
+//                barAttr.width = "50px";
                 return barAttr;
             }
         }]
@@ -225,7 +201,7 @@ Ext.ns("C3.PEAT.ux.Graph");
 
     Graph.chart.monthly = new Ext.chart.Chart({
         style: "background:#fff",
-        animate: true,
+//        animate: true,
         store: Graph.data.monthly,
         shadow: true,
         axes: [{
@@ -251,12 +227,20 @@ Ext.ns("C3.PEAT.ux.Graph");
             axis: "left",
             xField: "name",
             yField: "data",
-            showMarkers : false,
+            showMarkers : true,
             markerConfig: {
-                type: "cross",
+                type: "circle",
                 size: 4,
                 radius: 4,
-                'stroke-width': 0
+                'stroke-width': 1
+            },
+            tips: {
+                trackMouse: true,
+                width: 60,
+                height: 20,
+                renderer: function(storeItem, item) {
+                    this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('data'));
+                }
             }
         }]
     });
