@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2a133f7a-f333-4a04-83cd-326bb556a9ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Demo.iws" afterPath="$PROJECT_DIR$/Demo.iws" />
-    </list>
+    <list default="true" id="2a133f7a-f333-4a04-83cd-326bb556a9ce" name="Default" comment="" />
     <ignored path="Demo.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -72,7 +70,7 @@
       <file leaf-file-name="Demo.iws" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Demo.iws">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="84" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.4722222">
+            <state line="27" column="84" selection-start="1230" selection-end="1230" vertical-scroll-proportion="0.4722222">
               <folding />
             </state>
           </provider>
@@ -372,12 +370,16 @@
       <created>1338183059791</created>
       <updated>1338183059791</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="updated graph, ipw/iws">
+      <created>1338183087173</created>
+      <updated>1338183087173</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="1" width="1277" height="1559" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3295211" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -518,7 +520,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Demo.iws">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="84" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.4722222">
+        <state line="27" column="84" selection-start="1230" selection-end="1230" vertical-scroll-proportion="0.4722222">
           <folding />
         </state>
       </provider>
