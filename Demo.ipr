@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AntConfiguration">
+    <defaultAnt bundledAnt="true" />
+  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions />
@@ -146,6 +149,9 @@
     <dictionary name="Kevin Trotter">
       <words>
         <w>extjs</w>
+        <w>tbar</w>
+        <w>tbspacer</w>
+        <w>xtype</w>
       </words>
     </dictionary>
   </component>
