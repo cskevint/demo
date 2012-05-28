@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Question</title>
+<link rel="stylesheet" type="text/css" href="extjs-4.1.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="extjs-4.1.0/ext-all-debug.js"></script>
+<script type="text/javascript" src="question.js"></script>
+<script type="text/javascript">
+
+Ext.onReady(function(){
+
+	var q1 = {
+		questionText: "How old are you?",
+		type: "text",
+		defaultAnswer: 10
+	};
+	
+	var q2 = {
+		questionText: "What is your favorite color?",
+		type: "radioText",
+		defaultAnswer: "Red",
+		answers: ["Red","Blue","Purple"]
+	};
+
+	var q3 = {
+		questionText: "Which of these do you like?",
+		type: "checkbox",
+		defaultAnswer: ["Pizza","Ice Cream"],
+		answers: ["Hamburgers","Pizza","Ice Cream","Smoothie"]
+	};
+	
+	var q4 = {
+		questionText: "What kind of computer do you have?",
+		type: "dropdown",
+		defaultAnswer: "Mac Laptop",
+		answers: ["PC Laptop","PC Desktop","Mac Laptop","Mac Desktop","iPad"]
+	};
+	
+	var q5 = {
+		questionText: "Which one is cuter?",
+		type: "radioImage",
+		defaultAnswer: "Golden",
+		answers: [
+			{name:"Golden",image:"http://salmanspets.files.wordpress.com/2011/08/puppy.jpg"},
+			{name:"Germans",image:"http://images5.fanpop.com/image/photos/27300000/Doggy-dogs-27377996-800-600.jpg"},
+			{name:"Pug",image:"http://www.arknaturals.com/content/images/petgallery/Bailey.jpg"}
+		]
+	};
+	
+	var index = 0,
+		
+		questions = [q1, q2, q3, q4, q5],
+		
+		getNextQuestion = function() {
+			if(index >= questions.length) {
+				return null;
+			} else {
+				return questions[index++];	
+			}
+		},
+		
+		skipHandler = function(){
+			mainPanel.removeAll();
+			var question = getNextQuestion();
+			if(question) {
+				mainPanel.add(C3.ux.QuestionFactory.create(question));
+			}
+		},
+		
+		mainPanel = new Ext.panel.Panel({
+			title: 'Questions',
+			width: 400,
+			height: 300,
+			renderTo: Ext.getBody(),
+			collapsible: true,
+			floating: true,
+			bbar: [
+				{ xtype: 'tbfill' },
+				{ xtype: 'button', text: 'Skip this', handler: skipHandler},
+				{ xtype: 'button', text: 'Submit' }
+			],
+			items: [ C3.ux.QuestionFactory.create(getNextQuestion()) ]
+		});
+
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>
