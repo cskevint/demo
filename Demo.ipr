@@ -169,5 +169,14 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
+  <component name="libraryTable">
+    <library name="extjs-4.1">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/src/extjs-4.1.0" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
 </project>
 

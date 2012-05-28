@@ -3,9 +3,11 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/src/extjs-4.1.0" />
       <excludeFolder url="file://$MODULE_DIR$/zip" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="extjs-4.1" level="project" />
   </component>
 </module>
 
