@@ -1,115 +1,138 @@
-var Graph = {
-    button:{},
-    chart:{}
-};
+Ext.ns("C3.PEAT.ux.Graph");
+(function(Graph){
 
-Graph.button.dateTypeHandler = function() {
-    var current = Graph.panel.items.get(0);
-    Graph.panel.items.remove(current);
-    if(Graph.button.annual.pressed) {
-        Graph.panel.items.add(Graph.annualChart);
+    //<editor-fold desc="Graph.button">
 
-    } else if(Graph.button.monthly.pressed) {
-        Graph.panel.items.add(Graph.monthlyChart);
+    Graph.button = {};
 
-    } else if(Graph.button.daily.pressed) {
-        Graph.panel.items.add(current);
-        window.alert("not implemented yet");
-    }
-    Graph.panel.doLayout();
-};
+    Graph.button.dateTypeHandler = function() {
+        var current = Graph.panel.items.get(0);
+        Graph.panel.items.remove(current);
+        if(Graph.button.annual.pressed) {
+            Graph.panel.items.add(Graph.chart.annual);
 
-Graph.button.annual = new Ext.button.Button({
-    text: "Annual",
-    toggleGroup: "dateType",
-    pressed: true,
-    handler: Graph.button.dateTypeHandler
-});
+        } else if(Graph.button.monthly.pressed) {
+            Graph.panel.items.add(Graph.chart.monthly);
 
-Graph.button.monthly = new Ext.button.Button({
-    text: "Monthly",
-    toggleGroup: "dateType",
-    handler: Graph.button.dateTypeHandler
-});
+        } else if(Graph.button.daily.pressed) {
+            Graph.panel.items.add(current);
+            window.alert("not implemented yet");
+        }
+        Graph.panel.doLayout();
+    };
 
-Graph.button.daily = new Ext.button.Button({
-    text: "Daily",
-    toggleGroup: "dateType",
-    handler: Graph.button.dateTypeHandler
-});
+    Graph.button.annual = new Ext.button.Button({
+        text: "Annual",
+        toggleGroup: "dateType",
+        pressed: true,
+        handler: Graph.button.dateTypeHandler
+    });
 
-Graph.button.total = new Ext.button.Button({
-    text: "Total",
-    handler: function(){
+    Graph.button.monthly = new Ext.button.Button({
+        text: "Monthly",
+        toggleGroup: "dateType",
+        handler: Graph.button.dateTypeHandler
+    });
 
-    }
-});
+    Graph.button.daily = new Ext.button.Button({
+        text: "Daily",
+        toggleGroup: "dateType",
+        handler: Graph.button.dateTypeHandler
+    });
 
-Graph.button.electricity = new Ext.button.Button({
-    text: "Electricity",
-    handler: function(){
+    Graph.button.total = new Ext.button.Button({
+        text: "Total",
+        pressed: true,
+        toggleGroup: "data",
+        handler: function(){
 
-    }
-});
+        }
+    });
 
-Graph.button.gas = new Ext.button.Button({
-    text: "Gas",
-    handler: function(){
+    Graph.button.electricity = new Ext.button.Button({
+        text: "Electricity",
+        toggleGroup: "data",
+        handler: function(){
 
-    }
-});
+        }
+    });
 
-Graph.button.byUse = new Ext.button.Button({
-    text: "By Use",
-    handler: function(){
+    Graph.button.gas = new Ext.button.Button({
+        text: "Gas",
+        toggleGroup: "data",
+        handler: function(){
 
-    }
-});
+        }
+    });
 
-Graph.toolbar = new Ext.toolbar.Toolbar({
-    width: 1000,
-    items: [
-        Graph.button.annual,
-        Graph.button.monthly,
-        Graph.button.daily,
-        {xtype: "tbspacer", width: 50},
-        Graph.button.total,
-        Graph.button.electricity,
-        Graph.button.gas,
-        Graph.button.byUse
-    ]
-});
+    Graph.button.byUse = new Ext.button.Button({
+        text: "By Use",
+        toggleGroup: "data",
+        handler: function(){
 
+        }
+    });
 
-Graph.annualColors = ["url(#v-1)","url(#v-2)","url(#v-3)","url(#v-4)","url(#v-5)"];
+    Graph.button.previous = new Ext.button.Button({
+        text: "Previous Period",
+        enableToggle: true,
+        handler: function(){
 
-Ext.define("Ext.chart.theme.Annual", {
-    extend: "Ext.chart.theme.Base",
+        }
+    });
 
-    constructor: function(config) {
-        this.callParent([Ext.apply({
-            colors: Graph.annualColors
-        }, config)]);
-    }
-});
+    Graph.button.actions = new Ext.button.Button({
+        text: "Plan Actions",
+        enableToggle: true,
+        handler: function(){
 
-Graph.annualData = new Ext.data.JsonStore({
-    fields: ["name", "data"],
-    data: [
-        {name: "Previous Year", data: 10},
-        {name: "Current Year", data: 20},
-        {name: "Efficient", data: 10},
-        {name: "Average", data: 50}
-    ]
-});
+        }
+    });
 
-Graph.annualChart = new Ext.chart.Chart({
-    style: "background:#fff",
-    theme: "Annual",
-    animate: true,
-    store: Graph.annualData,
-    shadow: true,
-    gradients: [{
+    Graph.button.weather = new Ext.button.Button({
+        text: "Weather",
+        enableToggle: true,
+        handler: function(){
+
+        }
+    });
+
+    //</editor-fold>
+
+    //<editor-fold desc="Graph.chart">
+
+    Graph.chart = {};
+    Graph.data = {};
+    
+    var colors = ["url(#v-1)","url(#v-2)","url(#v-3)","url(#v-4)","url(#v-5)"];
+
+    Ext.define("Ext.chart.theme.Annual", {
+        extend: "Ext.chart.theme.Base",
+
+        constructor: function(config) {
+            this.callParent([Ext.apply({
+                colors: colors
+            }, config)]);
+        }
+    });
+
+    Graph.data.annual = new Ext.data.JsonStore({
+        fields: ["name", "data"],
+        data: [
+            {name: "Previous Year", data: 10},
+            {name: "Current Year", data: 20},
+            {name: "Efficient", data: 10},
+            {name: "Average", data: 50}
+        ]
+    });
+
+    Graph.chart.annual = new Ext.chart.Chart({
+        style: "background:#fff",
+        theme: "Annual",
+        animate: true,
+        store: Graph.data.annual,
+        shadow: true,
+        gradients: [{
             id: "v-1",
             angle: 0,
             stops: {
@@ -145,108 +168,122 @@ Graph.annualChart = new Ext.chart.Chart({
                 100: {color: "rgb(85, 10, 103)"}
             }
         }],
-    axes: [{
-        type: "Numeric",
-        minimum: 0,
+        axes: [{
+            type: "Numeric",
+            minimum: 0,
 //        maximum: 100,
-        position: "left",
-        fields: ["data"],
-        title: "Dollars",
-        minorTickSteps: 1,
-        grid: true
-    }, {
-        type: "Category",
-        position: "bottom",
-        fields: ["name"]
-    }],
-    series: [{
-        type: "column",
-        highlight: {
-            size: 7,
-            radius: 7
+            position: "left",
+            fields: ["data"],
+            title: "Dollars",
+            minorTickSteps: 1,
+            grid: true
+        }, {
+            type: "Category",
+            position: "bottom",
+            fields: ["name"]
+        }],
+        series: [{
+            type: "column",
+            highlight: {
+                size: 7,
+                radius: 7
+            },
+            axis: "left",
+            xField: "name",
+            yField: "data",
+            showMarkers : false,
+            markerConfig: {
+                type: "cross",
+                size: 4,
+                radius: 4,
+                'stroke-width': 0
+            },
+            renderer: function(sprite, storeItem, barAttr, i, store) {
+                barAttr.fill = colors[i % colors.length];
+                return barAttr;
+            }
+        }]
+    });
+
+    Graph.data.monthly = new Ext.data.JsonStore({
+        fields: ["name", "data"],
+        data: [
+            {name: "Jan", data: 10},
+            {name: "Feb", data: 20},
+            {name: "Mar", data: 10},
+            {name: "Apr", data: 50},
+            {name: "May", data: 40},
+            {name: "Jun", data: 10},
+            {name: "Jul", data: 70},
+            {name: "Aug", data: 20},
+            {name: "Sep", data: 10},
+            {name: "Oct", data: 90},
+            {name: "Nov", data: 70},
+            {name: "Dec", data: 30}
+        ]
+    });
+
+    Graph.chart.monthly = new Ext.chart.Chart({
+        style: "background:#fff",
+        animate: true,
+        store: Graph.data.monthly,
+        shadow: true,
+        axes: [{
+            type: "Numeric",
+            minimum: 0,
+            maximum: 100,
+            position: "left",
+            fields: ["data"],
+            title: "Dollars",
+            minorTickSteps: 1
+        }, {
+            type: "Category",
+            position: "bottom",
+            fields: ["name"],
+            grid: true
+        }],
+        series: [{
+            type: "line",
+            highlight: {
+                size: 7,
+                radius: 7
+            },
+            axis: "left",
+            xField: "name",
+            yField: "data",
+            showMarkers : false,
+            markerConfig: {
+                type: "cross",
+                size: 4,
+                radius: 4,
+                'stroke-width': 0
+            }
+        }]
+    });
+
+    //</editor-fold>
+
+    Graph.panel = new Ext.panel.Panel({
+        width: 800,
+        height: 400,
+        layout: "fit",
+        tbar: {
+            items: [
+                Graph.button.annual,
+                Graph.button.monthly,
+                Graph.button.daily,
+                {xtype: "tbspacer", width: 50},
+                Graph.button.total,
+                Graph.button.electricity,
+                Graph.button.gas,
+                Graph.button.byUse,
+                {xtype: "tbfill"},
+                Graph.button.previous,
+                Graph.button.actions,
+                Graph.button.weather
+            ]
         },
-        axis: "left",
-        xField: "name",
-        yField: "data",
-        showMarkers : false,
-        markerConfig: {
-            type: "cross",
-            size: 4,
-            radius: 4,
-            'stroke-width': 0
-        },
-        renderer: function(sprite, storeItem, barAttr, i, store) {
-            var colors = Graph.annualColors;
-            barAttr.fill = Graph.annualColors[i % colors.length];
-            return barAttr;
-        }
-    }]
-});
+        items: Graph.chart.annual
+    });
 
-Graph.monthlyData = new Ext.data.JsonStore({
-    fields: ["name", "data"],
-    data: [
-        {name: "Jan", data: 10},
-        {name: "Feb", data: 20},
-        {name: "Mar", data: 10},
-        {name: "Apr", data: 50},
-        {name: "May", data: 40},
-        {name: "Jun", data: 10},
-        {name: "Jul", data: 70},
-        {name: "Aug", data: 20},
-        {name: "Sep", data: 10},
-        {name: "Oct", data: 90},
-        {name: "Nov", data: 70},
-        {name: "Dec", data: 30}
-    ]
-});
-
-Graph.monthlyChart = new Ext.chart.Chart({
-    style: "background:#fff",
-    animate: true,
-    store: Graph.monthlyData,
-    shadow: true,
-    axes: [{
-        type: "Numeric",
-        minimum: 0,
-        maximum: 100,
-        position: "left",
-        fields: ["data"],
-        title: "Dollars",
-        minorTickSteps: 1
-    }, {
-        type: "Category",
-        position: "bottom",
-        fields: ["name"],
-        grid: true
-    }],
-    series: [{
-        type: "line",
-        highlight: {
-            size: 7,
-            radius: 7
-        },
-        axis: "left",
-        xField: "name",
-        yField: "data",
-        showMarkers : false,
-        markerConfig: {
-            type: "cross",
-            size: 4,
-            radius: 4,
-            'stroke-width': 0
-        }
-    }]
-});
-
-Graph.panel = new Ext.panel.Panel({
-    width: 800,
-    height: 400,
-    layout: "fit",
-    tbar: Graph.toolbar,
-    items: Graph.annualChart
-});
-
-Ext.onReady(function () {
-    Graph.panel.render(document.getElementById("chart"));
-});
+})(C3.PEAT.ux.Graph);
