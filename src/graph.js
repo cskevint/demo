@@ -146,34 +146,33 @@ Ext.ns("C3.PEAT.ux.Graph");
                 color: '#333'
             },
             renderer: function(sprite, storeItem, barAttr, i, store) {
-                var fill;
                 if(store.data.items.length > 3) {
                     switch(i) {
                         case 0:
-                            fill = "red";
+                            barAttr.fill = "red";
+                            barAttr.opacity = 0.5;
                             break;
                         case 1:
-                            fill = "red";
+                            barAttr.fill = "red";
                             break;
                         case 2:
-                            fill = "green";
+                            barAttr.fill = "green";
                             break;
                         case 3:
-                            fill = "gray";
+                            barAttr.fill = "gray";
                     }
                 } else {
                     switch(i) {
                         case 0:
-                            fill = "red";
+                            barAttr.fill = "red";
                             break;
                         case 1:
-                            fill = "green";
+                            barAttr.fill = "green";
                             break;
                         case 2:
-                            fill = "gray";
+                            barAttr.fill = "gray";
                     }
                 }
-                barAttr.fill = fill;
 //                barAttr.x += parseInt(barAttr.width)/2-25;
 //                barAttr.width = "50px";
                 return barAttr;
@@ -253,10 +252,11 @@ Ext.ns("C3.PEAT.ux.Graph");
         layout: "fit",
         tbar: {
             items: [
+                {xtype: "tbspacer", width: 25},
                 Graph.button.annual,
                 Graph.button.monthly,
                 Graph.button.daily,
-                {xtype: "tbspacer", width: 50},
+                {xtype: "tbspacer", width: 25},
                 Graph.button.total,
                 Graph.button.electricity,
                 Graph.button.gas,
@@ -264,7 +264,8 @@ Ext.ns("C3.PEAT.ux.Graph");
                 {xtype: "tbfill"},
                 Graph.button.previous,
                 Graph.button.actions,
-                Graph.button.weather
+                Graph.button.weather,
+                {xtype: "tbspacer", width: 25}
             ]
         },
         items: Graph.chart.annual
