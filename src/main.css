@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    height: 50px;
+}
+
+#title, #nav {
+    height: 25px;
+    /*width: 1000px;
+  margin: 0 auto;*/
+}
+
+#nav {
+    background-color: #dcdcdc;
+}
+
+#content {
+
+}
+
+#chart > div {
+    margin: 0 auto;
+}
+
+#plan {
+
+}
+
+
+.x-panel-default,
+.x-toolbar-default,
+.x-panel-body-default {
+    border-color: #cccccc;
+}
+
+.x-toolbar-default {
+    background-color: #eeeeee;
+    background-image: none;
+}
