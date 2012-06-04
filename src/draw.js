@@ -52,7 +52,7 @@ Ext.define("C3.PEAT.ux.Chart", {
     onRender: function() {
 
         var blueBar = new C3.PEAT.ux.ChartBar({
-            canvasHeight: 400,
+            canvasHeight: this.chartHeight,
             style: {
                 position: "absolute",
             },
@@ -63,7 +63,7 @@ Ext.define("C3.PEAT.ux.Chart", {
         });
 
         var redBar = new C3.PEAT.ux.ChartBar({
-            canvasHeight: 400,
+            canvasHeight: this.chartHeight,
             style: {
                 position: "absolute",
             },
@@ -74,7 +74,7 @@ Ext.define("C3.PEAT.ux.Chart", {
         });
 
         var greenBar = new C3.PEAT.ux.ChartBar({
-            canvasHeight: 400,
+            canvasHeight: this.chartHeight,
             style: {
                 position: "absolute",
             },
