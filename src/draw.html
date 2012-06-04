@@ -3,13 +3,28 @@
 <head>
     <meta charset="utf-8">
     <title>Draw</title>
+
     <link rel="stylesheet" type="text/css" href="extjs-4.1.0/resources/css/ext-all.css"/>
     <script type="text/javascript" src="extjs-4.1.0/ext-all-debug.js"></script>
+
     <script type="text/javascript" src="draw.js"></script>
+
+    <script type="text/javascript">
+        Ext.onReady(function(){
+            var chart = new C3.PEAT.ux.Chart({
+                chartWidth: 800,
+                chartHeight: 400,
+                renderTo: Ext.get("chart")
+            });
+        });
+    </script>
     <style type="text/css">
         @import url("main.css");
 
         #chart {
+            width: 800px;
+            height: 400px;
+            margin: 0 auto;
             border: 1px gray dotted;
         }
     </style>
