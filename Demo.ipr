@@ -145,6 +145,15 @@
       </item>
     </group>
   </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+      </value>
+    </option>
+  </component>
   <component name="ProjectDictionaryState">
     <dictionary name="Kevin Trotter">
       <words>
@@ -153,6 +162,12 @@
         <w>tbfill</w>
         <w>tbspacer</w>
         <w>xtype</w>
+      </words>
+    </dictionary>
+    <dictionary name="cskevint">
+      <words>
+        <w>bbox</w>
+        <w>variablewidthcolumn</w>
       </words>
     </dictionary>
   </component>
@@ -173,10 +188,12 @@
   <component name="libraryTable">
     <library name="extjs-4.1">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/src/extjs-4.1.0" />
+        <root url="file://$PROJECT_DIR$/src/extjs-4.1.0/src" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="file://$PROJECT_DIR$/src/extjs-4.1.0/src" />
+      </SOURCES>
     </library>
   </component>
 </project>
