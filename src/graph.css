@@ -1,0 +1,44 @@
+.x-graphTab {
+    border: 1px solid transparent;
+    background: transparent none;
+}
+
+.x-graphTabOver {
+    border: 1px solid gray;
+    background: #d3d3d3;
+}
+
+.x-graphTabPressed {
+    border: 1px solid black;
+    background: gray;
+
+}
+
+.x-graphTabPressed .x-btn-inner {
+    color: white;
+}
+
+/* ------------- */
+
+.switcherTab, .x-switcherTab {
+    border-radius: 0;
+    border: 1px solid transparent;
+    border-left: 1px solid gray;
+    background: transparent none;
+}
+
+.last {
+    border-right: 1px solid gray;
+}
+
+.switcherTabOver, .x-switcherTabOver {
+    background: lightgray none;
+}
+
+.x-switcherTabPressed {
+    background: gray none;
+}
+
+.x-switcherTabPressed .x-btn-inner {
+    color: white;
+}

@@ -5,30 +5,18 @@
     <title>Graph</title>
     <link rel="stylesheet" type="text/css" href="extjs-4.1.0/resources/css/ext-all.css"/>
     <script type="text/javascript" src="extjs-4.1.0/ext-all-debug.js"></script>
+
+    <script type="text/javascript" src="graph.data.js"></script>
     <script type="text/javascript" src="graph.js"></script>
+    <style type="text/css">
+        @import url("main.css");
+        @import url("graph.css");
+    </style>
     <script type="text/javascript">
         Ext.onReady(function () {
             C3.PEAT.ux.Graph.panel.render(document.getElementById("chart"));
         });
     </script>
-    <style type="text/css">
-        @import url("main.css");
-
-        .x-graphTab {
-            border: 1px solid transparent;
-            background: transparent none;
-        }
-
-        .x-graphTabOver {
-            border: 1px solid gray;
-            background: #d3d3d3;
-        }
-
-        .x-graphTabPressed {
-            border: 1px solid black;
-            background: gray;
-        }
-    </style>
 </head>
 <body>
 

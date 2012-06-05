@@ -1,11 +1,100 @@
 Ext.ns("C3.PEAT.ux.Graph");
+
+
+Ext.define("C3.PEAT.ux.Graph.SwitcherButton", {
+    extend : "Ext.button.Button",
+
+    initComponent : function(config) {
+        var me = this;
+        me.callParent(arguments);
+
+        Ext.apply(this, {
+            cls: "switcherTab",
+            overCls: "switcherTabOver",
+            pressedCls: "switcherTabPressed",
+            style: {
+                "min-width":"100px"
+            }
+        });
+    }
+});
+
+Ext.define("C3.PEAT.ux.Graph.Switcher", {
+    extend : "Ext.Component",
+
+    initComponent : function(config) {
+        var me = this;
+        me.callParent(arguments);
+
+        me.spending = new C3.PEAT.ux.Graph.SwitcherButton({
+            toggleGroup: "switcher",
+            pressed: true,
+            text: "Spending<br/>$1000"
+        });
+        me.electricity = new C3.PEAT.ux.Graph.SwitcherButton({
+            toggleGroup: "switcher",
+            text: "Electricity<br/>100kWh"
+        });
+        me.gas = new C3.PEAT.ux.Graph.SwitcherButton({
+            toggleGroup: "switcher",
+            text: "Gas<br/>50therms"
+        });
+        me.co2 = new C3.PEAT.ux.Graph.SwitcherButton({
+            toggleGroup: "switcher",
+            text: "CO<sub>2</sub><br/>10tons</sub>"
+        });
+        me.buildingUse = new C3.PEAT.ux.Graph.SwitcherButton({
+            toggleGroup: "switcher",
+            text: "Building End Use"
+        });
+        me.buildingUse.addCls("last");
+    },
+
+    onRender: function() {
+        var me = this;
+        me.callParent(arguments);
+
+        me.container = new Ext.Container({
+            width: 800,
+            height: 40,
+            layout: {
+                type: "hbox",
+                align: "stretch"
+            },
+            items : [
+                me.spending,
+                me.electricity,
+                me.gas,
+                me.co2,
+                me.buildingUse
+            ],
+            renderTo: this.el
+        })
+    }
+})
+
+Ext.define("C3.PEAT.ux.Graph.FilterButton", {
+    extend : "Ext.button.Button",
+
+    initComponent : function(config) {
+        var me = this;
+        me.callParent(arguments);
+
+        Ext.apply(this, {
+            cls: "graphTab",
+            overCls: "graphTabOver",
+            pressedCls: "graphTabPressed"
+        });
+    }
+});
+
+
 (function(Graph){
 
-    var Button = {}, Chart = {}, Data = {};
+    var Button = {}, Chart = {};
 
     Graph.button = Button;
     Graph.chart = Chart;
-    Graph.data = Data;
 
     //<editor-fold desc="Graph.button">
 
@@ -16,7 +105,7 @@ Ext.ns("C3.PEAT.ux.Graph");
             Graph.panel.items.add(Chart.annual);
 
         } else if(Button.monthly.pressed) {
-            Graph.panel.items.add(Chart.monthly);
+            Graph.panel.items.add(Graph.getMonthlyChart({}));
 
         } else if(Button.daily.pressed) {
             Graph.panel.items.add(current);
@@ -25,140 +114,74 @@ Ext.ns("C3.PEAT.ux.Graph");
         Graph.panel.doLayout();
     };
 
-    Button.annual = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+    Button.annual = new C3.PEAT.ux.Graph.FilterButton({
         text: "Annual",
         toggleGroup: "dateType",
         pressed: true,
         handler: dateTypeHandler
     });
 
-    Button.monthly = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+    Button.monthly = new C3.PEAT.ux.Graph.FilterButton({
         text: "Monthly",
         toggleGroup: "dateType",
         handler: dateTypeHandler
     });
 
-    Button.daily = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+    Button.daily = new C3.PEAT.ux.Graph.FilterButton({
         text: "Daily",
         toggleGroup: "dateType",
         handler: dateTypeHandler
     });
 
-    Button.total = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+
+
+    Button.total = new C3.PEAT.ux.Graph.FilterButton({
         text: "Total",
+        toggleGroup: "spendType",
         pressed: true,
-        toggleGroup: "data",
-        handler: function(){
-            Chart.monthly.series.items[0].toggleAll(true);
-            Chart.monthly.series.items[1].toggleAll(false)
-            Chart.monthly.series.items[2].toggleAll(false)
-//            Chart.monthly.series.items[1].hideAll(0);
-//            Chart.monthly.series.items[2].hideAll(0);
-//            Chart.monthly.series.items[0].showAll(0);
-
-        }
+        handler: Ext.emptyFn
     });
 
-    Button.electricity = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+    Button.eletricity = new C3.PEAT.ux.Graph.FilterButton({
         text: "Electricity",
-        toggleGroup: "data",
-        handler: function(){
-            Chart.monthly.series.items[0].hideAll(0);
-            Chart.monthly.series.items[2].hideAll(0);
-            Chart.monthly.series.items[1].showAll(0);
-        }
+        toggleGroup: "spendType",
+        handler: Ext.emptyFn
     });
 
-    Button.gas = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+    Button.gas = new C3.PEAT.ux.Graph.FilterButton({
         text: "Gas",
-        toggleGroup: "data",
-        handler: function(){
-            Chart.monthly.series.items[0].hideAll(0);
-            Chart.monthly.series.items[1].hideAll(0);
-            Chart.monthly.series.items[2].showAll(0);
-        }
+        toggleGroup: "spendType",
+        handler: Ext.emptyFn
     });
 
-    Button.byUse = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
-        text: "By Use",
-        toggleGroup: "data",
-        handler: function(){
 
-        }
-    });
 
-    Button.previous = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+    Button.previous = new C3.PEAT.ux.Graph.FilterButton({
         text: "Previous Period",
         enableToggle: true,
-        handler: function(){
-
-        }
+        handler: Ext.emptyFn
     });
 
-    Button.actions = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+    Button.actions = new C3.PEAT.ux.Graph.FilterButton({
         text: "Plan Actions",
         enableToggle: true,
-        handler: function(){
-
-        }
+        handler: Ext.emptyFn
     });
 
-    Button.weather = new Ext.button.Button({
-        cls: "graphTab",
-        overCls: "graphTabOver",
-        pressedCls: "graphTabPressed",
+    Button.weather = new C3.PEAT.ux.Graph.FilterButton({
         text: "Weather",
         enableToggle: true,
-        handler: function(){
-
-        }
+        handler: Ext.emptyFn
     });
 
     //</editor-fold>
 
     //<editor-fold desc="Graph.chart (annual)">
 
-    Data.annual = new Ext.data.JsonStore({
-        fields: ["name", "data"],
-        data: [
-            {name: "Previous Year", data: 10},
-            {name: "Current Year", data: 20},
-            {name: "Efficient", data: 10},
-            {name: "Average", data: 50}
-        ]
-    });
-
     Chart.annual = new Ext.chart.Chart({
         style: "background:#fff",
 //        animate: true,
-        store: Data.annual,
+        store: C3.PEAT.ux.Graph.data.annual,
         shadow: false,
         axes: [{
             type: "Numeric",
@@ -226,165 +249,164 @@ Ext.ns("C3.PEAT.ux.Graph");
 
     //<editor-fold desc="Graph.chart (monthly)">
 
-    Data.monthly = new Ext.data.JsonStore({
-        fields: ["name", "total", "electricity", "gas"],
-        data: [
-            {name: "Jan", total: 10, electricity: 5, gas: 5},
-            {name: "Feb", total: 20, electricity: 10, gas: 10},
-            {name: "Mar", total: 10, electricity: 8, gas: 2},
-            {name: "Apr", total: 50, electricity: 10, gas: 40},
-            {name: "May", total: 40, electricity: 30, gas: 10},
-            {name: "Jun", total: 10, electricity: 0, gas: 10},
-            {name: "Jul", total: 70, electricity: 55, gas: 15},
-            {name: "Aug", total: 20, electricity: 15, gas: 5},
-            {name: "Sep", total: 80, electricity: 45, gas: 35},
-            {name: "Oct", total: 90, electricity: 80, gas: 10},
-            {name: "Nov", total: 70, electricity: 65, gas: 5},
-            {name: "Dec", total: 30, electricity: 15, gas: 15}
+    Graph.getMonthlyChart = function(config) {
+        var totalSeries = {
+            type: "line",
+//        highlight: {
+//            size: 7,
+//            radius: 7
+//        },
+            axis: "left",
+            xField: "name",
+            yField: "total",
+            showMarkers : true,
+            markerConfig: {
+                type: "circle",
+                size: 4,
+                radius: 4,
+                'stroke-width': 1
+            },
+            tips: {
+                trackMouse: true,
+                width: 60,
+                height: 20,
+                renderer: function(storeItem, item) {
+                    this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
+                }
+            }
+        };
+
+        var electricitySeries = {
+            type: "line",
+//        highlight: {
+//            size: 7,
+//            radius: 7
+//        },
+            axis: "left",
+            xField: "name",
+            yField: "electricity",
+            showMarkers : true,
+            markerConfig: {
+                type: "circle",
+                size: 4,
+                radius: 4,
+                'stroke-width': 1
+            },
+            tips: {
+                trackMouse: true,
+                width: 60,
+                height: 20,
+                renderer: function(storeItem, item) {
+                    this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
+                }
+            }
+        };
+
+        var gasSeries = {
+            type: "line",
+//        highlight: {
+//            size: 7,
+//            radius: 7
+//        },
+            axis: "left",
+            xField: "name",
+            yField: "gas",
+            showMarkers : true,
+            markerConfig: {
+                type: "circle",
+                size: 4,
+                radius: 4,
+                'stroke-width': 1
+            },
+            tips: {
+                trackMouse: true,
+                width: 60,
+                height: 20,
+                renderer: function(storeItem, item) {
+                    this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
+                }
+            }
+        };
+
+        Chart.monthly = new Ext.chart.Chart({
+            style: "background:#fff",
+//        animate: true,
+            store: C3.PEAT.us.Graph.data.monthly,
+            shadow: true,
+            legend: true,
+            axes: [{
+                type: "Numeric",
+                minimum: 0,
+                maximum: 100,
+                position: "left",
+                fields: ["total"],
+                title: "Dollars",
+                minorTickSteps: 1
+            }, {
+                type: "Category",
+                position: "bottom",
+                fields: ["name"],
+                grid: true
+            }],
+            series: [totalSeries, electricitySeries, gasSeries]
+        });
+
+        Chart.monthly.on({
+            render: function(){
+                setTimeout(function(){
+//                Chart.monthly.series.items[1].hideAll();
+//                Chart.monthly.series.items[2].hideAll();
+                    //Chart.monthly.series.items[0].showAll();
+                }, 0);
+            }
+        });
+    };
+
+    //</editor-fold>
+
+//    Graph.mainPanel = new Ext.panel.Panel({});
+
+    Graph.switcher = new C3.PEAT.ux.Graph.Switcher({
+        dock: "top"
+    });
+
+    Graph.subToolbar = new Ext.toolbar.Toolbar({
+        style: {
+            border: "0 none"
+        },
+        items: [
+            Button.total, Button.eletricity, Button.gas
         ]
     });
 
-    var totalSeries = {
-        type: "line",
-//        highlight: {
-//            size: 7,
-//            radius: 7
-//        },
-        axis: "left",
-        xField: "name",
-        yField: "total",
-        showMarkers : true,
-        markerConfig: {
-            type: "circle",
-            size: 4,
-            radius: 4,
-            'stroke-width': 1
-        },
-        tips: {
-            trackMouse: true,
-            width: 60,
-            height: 20,
-            renderer: function(storeItem, item) {
-                this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
-            }
-        }
-    };
-
-    var electricitySeries = {
-        type: "line",
-//        highlight: {
-//            size: 7,
-//            radius: 7
-//        },
-        axis: "left",
-        xField: "name",
-        yField: "electricity",
-        showMarkers : true,
-        markerConfig: {
-            type: "circle",
-            size: 4,
-            radius: 4,
-            'stroke-width': 1
-        },
-        tips: {
-            trackMouse: true,
-            width: 60,
-            height: 20,
-            renderer: function(storeItem, item) {
-                this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
-            }
-        }
-    };
-
-    var gasSeries = {
-        type: "line",
-//        highlight: {
-//            size: 7,
-//            radius: 7
-//        },
-        axis: "left",
-        xField: "name",
-        yField: "gas",
-        showMarkers : true,
-        markerConfig: {
-            type: "circle",
-            size: 4,
-            radius: 4,
-            'stroke-width': 1
-        },
-        tips: {
-            trackMouse: true,
-            width: 60,
-            height: 20,
-            renderer: function(storeItem, item) {
-                this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
-            }
-        }
-    };
-
-    Chart.monthly = new Ext.chart.Chart({
-        style: "background:#fff",
-//        animate: true,
-        store: Data.monthly,
-        shadow: true,
-        legend: true,
-        axes: [{
-            type: "Numeric",
-            minimum: 0,
-            maximum: 100,
-            position: "left",
-            fields: ["total"],
-            title: "Dollars",
-            minorTickSteps: 1
-        }, {
-            type: "Category",
-            position: "bottom",
-            fields: ["name"],
-            grid: true
-        }],
-        series: [totalSeries, electricitySeries, gasSeries]
+    Graph.toolbar = new Ext.toolbar.Toolbar({
+        dock: "top",
+        items: [
+            {xtype: "tbspacer", width: 25},
+            Button.annual,
+            Button.monthly,
+            Button.daily,
+            {xtype: "tbspacer", width: 25},
+            Graph.subToolbar,
+            {xtype: "tbfill"},
+            Button.previous,
+            Button.actions,
+            Button.weather,
+            {xtype: "tbspacer", width: 25}
+        ]
     });
-
-    Chart.monthly.on({
-        render: function(){
-            setTimeout(function(){
-//                Chart.monthly.series.items[1].hideAll();
-//                Chart.monthly.series.items[2].hideAll();
-                //Chart.monthly.series.items[0].showAll();
-            }, 0);
-        }
-    });
-
-    //</editor-fold>
 
     Graph.panel = new Ext.panel.Panel({
         width: 800,
         height: 400,
         layout: "fit",
-        tbar: {
-            items: [
-                {xtype: "tbspacer", width: 25},
-                Button.annual,
-                Button.monthly,
-                Button.daily,
-                {xtype: "tbspacer", width: 25},
-                Button.total,
-                Button.electricity,
-                Button.gas,
-                Button.byUse,
-                {xtype: "tbfill"},
-                Button.previous,
-                Button.actions,
-                Button.weather,
-                {xtype: "tbspacer", width: 25}
-            ]
-        },
+        dockedItems: [ Graph.switcher, Graph.toolbar ],
         items: Chart.annual
     });
 
 })(C3.PEAT.ux.Graph);
 
-Ext.define('C3.ui.widget.chart.series.VariableWidthColumn', {
+Ext.define('C3.PEAT.ux.chart.series.VariableWidthColumn', {
 
     extend: 'Ext.chart.series.Bar',
 

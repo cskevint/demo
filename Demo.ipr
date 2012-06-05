@@ -167,6 +167,7 @@
     <dictionary name="cskevint">
       <words>
         <w>bbox</w>
+        <w>hbox</w>
         <w>variablewidthcolumn</w>
       </words>
     </dictionary>
