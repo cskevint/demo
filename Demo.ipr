@@ -168,6 +168,7 @@
       <words>
         <w>bbox</w>
         <w>hbox</w>
+        <w>javascripts</w>
         <w>variablewidthcolumn</w>
       </words>
     </dictionary>

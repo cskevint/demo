@@ -48,6 +48,6 @@ Ext.define("C3.PEAT.ux.Graph.Switcher", {
                 me.buildingUse
             ],
             renderTo: this.el
-        })
+        });
     }
 });
