@@ -71,14 +71,56 @@ var monthlyData = {
                 low : { value : 40, unit : "F" },
                 high : { value : 50, unit : "F" }
             }
+        },{
+            startDate: "5/6/12",
+            endDate: "6/5/12",
+            total : {
+                spending : { value : 40, unit : "$" }
+            },
+            electricity : {
+                spending: { value : 40, unit : "$" },
+                usage : { value : 40, unit : "kWh" }
+            },
+            gas : {
+                spending: { value : 40, unit : "$" },
+                usage : { value : 40, unit : "therms" }
+            },
+            co2 : {
+                usage : { value : 40, unit : "therms" }
+            },
+            weather : {
+                low : { value : 40, unit : "F" },
+                high : { value : 50, unit : "F" }
+            }
         }
     ]
 };
 
 var dailyData = {
-    grain : "month",
+    grain : "daily",
     data: [
         {
+            startDate: "5/6/12",
+            endDate: "6/5/12",
+            total : {
+                spending : { value : 40, unit : "$" }
+            },
+            electricity : {
+                spending: { value : 40, unit : "$" },
+                usage : { value : 40, unit : "kWh" }
+            },
+            gas : {
+                spending: { value : 40, unit : "$" },
+                usage : { value : 40, unit : "therms" }
+            },
+            co2 : {
+                usage : { value : 40, unit : "therms" }
+            },
+            weather : {
+                low : { value : 40, unit : "F" },
+                high : { value : 50, unit : "F" }
+            }
+        },{
             startDate: "5/6/12",
             endDate: "6/5/12",
             total : {
