@@ -1,7 +1,7 @@
 Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
-    extend : "Ext.Component",
+    extend : "C3.PEAT.ux.Graph.AbstractChart",
 
-    initComponent : function(config) {
+    initComponent : function() {
         var me = this;
 
         var totalSeries = {
@@ -71,8 +71,10 @@ Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
         };
 
         me.chart = new Ext.chart.Chart({
+            width : 798,
+            height : 352,
             style: "background:#fff",
-            store: C3.PEAT.us.Graph.data.monthly,
+            store: me.store,
             shadow: true,
             legend: true,
             axes: [{
@@ -101,12 +103,5 @@ Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
                 }, 0);
             }
         });
-    },
-
-    onRender: function() {
-        var me = this;
-        me.callParent(arguments);
-
-        me.chart.render(this.el);
     }
 });

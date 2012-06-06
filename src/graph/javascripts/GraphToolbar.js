@@ -2,24 +2,6 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
 
     extend : "Ext.Component",
 
-    dateTypeHandler : function() {
-        /*
-        var current = Graph.panel.items.get(0);
-        Graph.panel.items.remove(current);
-        if(Button.annual.pressed) {
-            Graph.panel.items.add(Chart.annual);
-
-        } else if(Button.monthly.pressed) {
-            Graph.panel.items.add(Graph.getMonthlyChart({}));
-
-        } else if(Button.daily.pressed) {
-            Graph.panel.items.add(current);
-            console.log("not implemented yet");
-        }
-        Graph.panel.doLayout();
-        */
-    },
-
     initComponent : function(config) {
         var me = this;
         me.callParent(arguments);
@@ -28,56 +10,74 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             text: "Annual",
             toggleGroup: "dateType",
             pressed: true,
-            handler: me.dateTypeHandler
+            handler: function() {
+                me.fireEvent("filter", { type : "annual" });
+            }
         });
 
         me.monthly = new C3.PEAT.ux.Graph.FilterButton({
             text: "Monthly",
             toggleGroup: "dateType",
-            handler: me.dateTypeHandler
+            handler: function(){
+                me.fireEvent("filter", { type : "monthly" });
+            }
         });
 
         me.daily = new C3.PEAT.ux.Graph.FilterButton({
             text: "Daily",
             toggleGroup: "dateType",
-            handler: me.dateTypeHandler
+            handler: function() {
+                me.fireEvent("filter", { type : "daily" });
+            }
         });
 
         me.total = new C3.PEAT.ux.Graph.FilterButton({
             text: "Total",
             toggleGroup: "spendType",
             pressed: true,
-            handler: Ext.emptyFn
+            handler: function() {
+                me.fireEvent("filter", { type : "total" });
+            }
         });
 
         me.eletricity = new C3.PEAT.ux.Graph.FilterButton({
             text: "Electricity",
             toggleGroup: "spendType",
-            handler: Ext.emptyFn
+            handler: function() {
+                me.fireEvent("filter", { type : "electricity" });
+            }
         });
 
         me.gas = new C3.PEAT.ux.Graph.FilterButton({
             text: "Gas",
             toggleGroup: "spendType",
-            handler: Ext.emptyFn
+            handler: function() {
+                me.fireEvent("filter", { type : "gas" });
+            }
         });
 
         me.previous = new C3.PEAT.ux.Graph.OverlayButton({
             text: "Previous Period",
             enableToggle: true,
-            handler: Ext.emptyFn
+            handler: function() {
+                me.fireEvent("overlay", { type : "previous" });
+            }
         });
 
         me.actions = new C3.PEAT.ux.Graph.OverlayButton({
             text: "Plan Actions",
             enableToggle: true,
-            handler: Ext.emptyFn
+            handler: function() {
+                me.fireEvent("overlay", { type : "actions" });
+            }
         });
 
         me.weather = new C3.PEAT.ux.Graph.OverlayButton({
             text: "Weather",
             enableToggle: true,
-            handler: Ext.emptyFn
+            handler: function() {
+                me.fireEvent("overlay", { type : "weather" });
+            }
         });
 
         me.subToolbar = new Ext.toolbar.Toolbar({

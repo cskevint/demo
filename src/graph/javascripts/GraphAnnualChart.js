@@ -1,12 +1,5 @@
 Ext.define("C3.PEAT.ux.Graph.AnnualChart", {
-    extend : "Ext.Component",
-
-    constructor: function(config){
-        this.callParent(arguments);
-        this.initConfig(config);
-
-        this.store = config.store;
-    },
+    extend : "C3.PEAT.ux.Graph.AbstractChart",
 
     initComponent : function() {
         var me = this;
@@ -73,12 +66,5 @@ Ext.define("C3.PEAT.ux.Graph.AnnualChart", {
             }]
         });
 
-    },
-
-    onRender: function() {
-        var me = this;
-        me.callParent(arguments);
-
-        me.chart.render(this.el);
     }
 });
