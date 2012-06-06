@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Graph</title>
+    <link rel="stylesheet" type="text/css" href="../extjs-4.1.0/resources/css/ext-all.css"/>
+    <script type="text/javascript" src="../extjs-4.1.0/ext-all-debug.js"></script>
+
+    <script type="text/javascript" src="javascripts/views/GraphSwitcher.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphSwitcherButton.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphFilterButton.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphOverlayButton.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphAnnualSeries.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphToolbar.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphAbstractChart.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphAnnualChart.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphMonthlyChart.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphView.js"></script>
+
+    <script type="text/javascript" src="graph.data.js"></script>
+
+    <style type="text/css">
+        @import url("../prototype/main.css");
+        @import url("stylesheets/graph.css");
+    </style>
+    <script type="text/javascript">
+        Ext.onReady(function () {
+            new C3.PEAT.ux.Graph.View({
+                renderTo: "chart"
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div id="header">
+    <div id="title"></div>
+    <div id="nav"></div>
+</div>
+<div id="content">
+    <div id="chart"></div>
+    <div id="plan"></div>
+</div>
+
+
+</body>
+</html>

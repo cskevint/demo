@@ -131,15 +131,15 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
     },
 
     getSpendType : function() {
-        var me = this;
-        return me.total.pressed ? "total" : (me.electricity.pressed ? "electricity" : "gas");
+        var me = this, spendType =  me.total.pressed ? "total" : (me.electricity.pressed ? "electricity" : "gas");
+        return me.spendTypeEnabled ? spendType : null;
     },
 
     getFilterData : function() {
         var me = this;
         return {
             grainType : me.getGrainType(),
-            spendType : me.spendTypeEnabled ? me.getSpendType() : null,
+            spendType : me.getSpendType(),
             previous : me.previous.pressed,
             actions : me.actions.pressed,
             weather : me.weather.pressed
