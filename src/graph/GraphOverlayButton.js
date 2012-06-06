@@ -1,4 +1,5 @@
-Ext.define("C3.PEAT.ux.Graph.FilterButton", {
+Ext.define("C3.PEAT.ux.Graph.OverlayButton", {
+
     extend : "Ext.button.Button",
 
     initComponent : function(config) {
@@ -6,9 +7,9 @@ Ext.define("C3.PEAT.ux.Graph.FilterButton", {
         me.callParent(arguments);
 
         Ext.apply(this, {
-            cls: "graphTab",
-            overCls: "graphTabOver",
-            pressedCls: "graphTabPressed"
+            cls: "overlayButton",
+            overCls: "overlayButtonOver",
+            pressedCls: "overlayButtonPressed"
         });
     }
 });

@@ -1,4 +1,4 @@
-Ext.define('C3.PEAT.ux.chart.series.AnnualBarChart', {
+Ext.define('C3.PEAT.ux.Graph.AnnualSeries', {
 
     extend: 'Ext.chart.series.Bar',
 

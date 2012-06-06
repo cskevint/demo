@@ -67,19 +67,19 @@ Ext.ns("C3.PEAT.ux.Graph");
 
 
 
-    Button.previous = new C3.PEAT.ux.Graph.FilterButton({
+    Button.previous = new C3.PEAT.ux.Graph.OverlayButton({
         text: "Previous Period",
         enableToggle: true,
         handler: Ext.emptyFn
     });
 
-    Button.actions = new C3.PEAT.ux.Graph.FilterButton({
+    Button.actions = new C3.PEAT.ux.Graph.OverlayButton({
         text: "Plan Actions",
         enableToggle: true,
         handler: Ext.emptyFn
     });
 
-    Button.weather = new C3.PEAT.ux.Graph.FilterButton({
+    Button.weather = new C3.PEAT.ux.Graph.OverlayButton({
         text: "Weather",
         enableToggle: true,
         handler: Ext.emptyFn

@@ -1,26 +1,26 @@
-.x-graphTab {
+.x-filterButton {
     border: 1px solid transparent;
     background: transparent none;
 }
 
-.x-graphTabOver {
+.x-filterButtonOver {
     border: 1px solid gray;
     background: #d3d3d3;
 }
 
-.x-graphTabPressed {
+.x-filterButtonPressed {
     border: 1px solid black;
     background: gray;
 
 }
 
-.x-graphTabPressed .x-btn-inner {
+.x-filterButtonPressed .x-btn-inner {
     color: white;
 }
 
 /* ------------- */
 
-.switcherTab, .x-switcherTab {
+.switcherButton, .x-switcherButton {
     border-radius: 0;
     border: 1px solid transparent;
     border-left: 1px solid gray;
@@ -31,14 +31,31 @@
     border-right: 1px solid gray;
 }
 
-.switcherTabOver, .x-switcherTabOver {
+.switcherButtonOver, .x-switcherButtonOver {
     background: lightgray none;
 }
 
-.x-switcherTabPressed {
+.x-switcherButtonPressed {
     background: gray none;
 }
 
-.x-switcherTabPressed .x-btn-inner {
+.x-switcherButtonPressed .x-btn-inner {
     color: white;
+}
+
+/* ------------ */
+
+.overlayButton {
+    border: 1px solid transparent;
+    background: transparent none;
+}
+
+.overlayButtonOver {
+    border: 1px solid transparent;
+    background: lightgray none;
+}
+
+.x-overlayButtonPressed {
+    border: 1px solid lightgray;
+    background: white none;
 }
