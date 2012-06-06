@@ -15,9 +15,9 @@
     <script type="text/javascript" src="javascripts/GraphAbstractChart.js"></script>
     <script type="text/javascript" src="javascripts/GraphAnnualChart.js"></script>
     <script type="text/javascript" src="javascripts/GraphMonthlyChart.js"></script>
+    <script type="text/javascript" src="javascripts/GraphView.js"></script>
 
     <script type="text/javascript" src="graph.data.js"></script>
-    <script type="text/javascript" src="graph.controller.js"></script>
 
     <style type="text/css">
         @import url("../prototype/main.css");
@@ -25,7 +25,9 @@
     </style>
     <script type="text/javascript">
         Ext.onReady(function () {
-            C3.PEAT.ux.Graph.panel.render(document.getElementById("chart"));
+            new C3.PEAT.ux.Graph.View({
+                renderTo: "chart"
+            });
         });
     </script>
 </head>
