@@ -4,9 +4,8 @@ Ext.define("C3.PEAT.ux.Graph.AnnualChart", {
     initComponent : function() {
         var me = this;
 
-        me.chart = new Ext.chart.Chart({
-            width : me.width,
-            height : me.height,
+        me.chartInner = new Ext.chart.Chart({
+            flex : 1,
             style: "background:#fff",
             store: me.store,
             shadow: false,
@@ -17,7 +16,7 @@ Ext.define("C3.PEAT.ux.Graph.AnnualChart", {
                 position: "left",
                 fields: ["data"],
                 dashSize: 0,
-                title: "Dollars",
+//                title: "Dollars",
                 grid: true
             }],
             series: [{
@@ -64,6 +63,53 @@ Ext.define("C3.PEAT.ux.Graph.AnnualChart", {
                     return barAttr;
                 }
             }]
+        });
+
+        Ext.define('AnnualGraphText', {
+            extend: 'Ext.data.Model',
+            fields: [
+                { name:'accountName', type:'string' },
+                { name:'similar', type:'string' },
+                { name:'efficient', type:'string' }
+            ]
+        });
+
+        me.textView = new Ext.view.View({
+            width : 300,
+            style : {
+                'padding-left':"25px"
+            },
+            store: new Ext.data.Store({
+                model: 'AnnualGraphText',
+                data: [
+                    { accountName : "Boondock Berkeley", similar : "18%", efficient : "32%" }
+                ]
+            }),
+            tpl: new Ext.XTemplate(
+                '<tpl for=".">',
+                    '<div style="margin-top:50px">',
+                        '<div style="margin-bottom:5px;">{accountName}</div>',
+                        '<div style="margin-bottom:15px;">ANNUAL ENERGY SPENDING</div>',
+                        '<div style="margin-bottom:25px;">How do you compare to similar businesses</div>',
+                        '<div style="margin-bottom:5px;margin-left: 30px">You spend {similar} more than similar businesses</div>',
+                        '<div style="margin-left:30px;">You spend {efficient} more than energy efficient businesses</div>',
+                    '</div>',
+                '</tpl>'
+            )
+        });
+
+        me.chart = new Ext.Container({
+            width : me.width,
+            height : me.height,
+            layout: {
+                flex : true,
+                type: "hbox",
+                align: "stretch"
+            },
+            items : [
+                me.textView,
+                me.chartInner
+            ]
         });
 
     }

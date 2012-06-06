@@ -6,12 +6,6 @@ Ext.define("C3.PEAT.ux.Graph.SwitcherButton", {
      */
     eventType : "",
 
-    constructor: function(config){
-        this.callParent(arguments);
-
-        Ext.apply(this, config);
-    },
-
     initComponent : function() {
         var me = this;
         me.callParent(arguments);

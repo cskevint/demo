@@ -76,14 +76,14 @@ Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
             style: "background:#fff",
             store: me.store,
             shadow: true,
-            legend: true,
+//            legend: true,
             axes: [{
                 type: "Numeric",
                 minimum: 0,
                 maximum: 100,
                 position: "left",
                 fields: ["total"],
-                title: "Dollars",
+//                title: "Dollars",
                 minorTickSteps: 1
             }, {
                 type: "Category",

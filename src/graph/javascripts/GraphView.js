@@ -1,7 +1,7 @@
 Ext.define("C3.PEAT.ux.Graph.View", {
     extend : "Ext.Component",
 
-    initComponent : function(config) {
+    initComponent : function() {
         var me = this;
         me.callParent(arguments);
 
