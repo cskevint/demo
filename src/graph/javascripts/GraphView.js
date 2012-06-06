@@ -5,24 +5,43 @@ Ext.define("C3.PEAT.ux.Graph.View", {
         var me = this;
         me.callParent(arguments);
 
+        var width = 800, height = 400, chartHeight = 0;
+
         me.switcher = new C3.PEAT.ux.Graph.Switcher({
+            width : width,
+            height : 40,
             dock: "top"
         });
 
         me.toolbar = new C3.PEAT.ux.Graph.Toolbar({
+            width : width,
+            height : 28,
             dock: "top"
         });
 
+        chartHeight = height - me.switcher.height - me.toolbar.height;
+
         me.annualChart = new C3.PEAT.ux.Graph.AnnualChart({
+            width : width,
+            height : chartHeight,
             store: C3.PEAT.ux.Graph.data.annual
         });
 
         me.panel = new Ext.panel.Panel({
-            width: 800,
-            height: 400,
-            layout: "fit",
+            width: width,
+            height: height,
             dockedItems: [ me.switcher, me.toolbar ],
             items: me.annualChart
+        });
+
+        me.switcher.on({
+            switch : function(event) {
+                if(event.type == "spending") {
+                    me.toolbar.setSpendTypeEnabled(true);
+                } else {
+                    me.toolbar.setSpendTypeEnabled(false);
+                }
+            }
         });
 
         me.toolbar.on({
@@ -36,6 +55,8 @@ Ext.define("C3.PEAT.ux.Graph.View", {
                 } else if(event.type == "monthly") {
 
                     me.monthlyChart = new C3.PEAT.ux.Graph.MonthlyChart({
+                        width : width,
+                        height : chartHeight,
                         store: C3.PEAT.ux.Graph.data.monthly
                     });
                     me.panel.items.add("monthly", me.monthlyChart);
@@ -47,7 +68,7 @@ Ext.define("C3.PEAT.ux.Graph.View", {
                 me.panel.doLayout();
             },
             overlay : function(event) {
-                console.log(event.type);
+                console.log(me.toolbar.getFilterData());
             }
         });
     },

@@ -6,6 +6,10 @@ Ext.define("C3.PEAT.ux.Graph.AbstractChart", {
         this.initConfig(config);
 
         this.store = config.store;
+
+        this.width = config.width;
+
+        this.height = config.height;
     },
 
     onRender: function() {

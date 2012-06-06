@@ -2,7 +2,7 @@ Ext.define("C3.PEAT.ux.Graph.OverlayButton", {
 
     extend : "Ext.button.Button",
 
-    initComponent : function(config) {
+    initComponent : function() {
         var me = this;
         me.callParent(arguments);
 

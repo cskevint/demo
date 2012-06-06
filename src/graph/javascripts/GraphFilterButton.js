@@ -2,7 +2,7 @@ Ext.define("C3.PEAT.ux.Graph.FilterButton", {
 
     extend : "Ext.button.Button",
 
-    initComponent : function(config) {
+    initComponent : function() {
         var me = this;
         me.callParent(arguments);
 
@@ -11,5 +11,11 @@ Ext.define("C3.PEAT.ux.Graph.FilterButton", {
             overCls: "filterButtonOver",
             pressedCls: "filterButtonPressed"
         });
+    },
+
+    onClick: function(e) {
+        if(!this.pressed) {
+            this.callParent(arguments);
+        }
     }
 });

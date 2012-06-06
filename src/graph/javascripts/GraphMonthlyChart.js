@@ -71,8 +71,8 @@ Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
         };
 
         me.chart = new Ext.chart.Chart({
-            width : 798,
-            height : 352,
+            width : me.width,
+            height : me.height,
             style: "background:#fff",
             store: me.store,
             shadow: true,

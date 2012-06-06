@@ -2,6 +2,8 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
 
     extend : "Ext.Component",
 
+    spendTypeEnabled : true,
+
     initComponent : function(config) {
         var me = this;
         me.callParent(arguments);
@@ -40,7 +42,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             }
         });
 
-        me.eletricity = new C3.PEAT.ux.Graph.FilterButton({
+        me.electricity = new C3.PEAT.ux.Graph.FilterButton({
             text: "Electricity",
             toggleGroup: "spendType",
             handler: function() {
@@ -80,26 +82,17 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             }
         });
 
-        me.subToolbar = new Ext.toolbar.Toolbar({
-            style: {
-                border: "0 none"
-            },
-            items: [
-                me.total,
-                me.eletricity,
-                me.gas
-            ]
-        });
-
         me.toolbar = new Ext.toolbar.Toolbar({
-            width: 800,
+            width: me.width,
             items: [
                 {xtype: "tbspacer", width: 25},
                 me.annual,
                 me.monthly,
                 me.daily,
                 {xtype: "tbspacer", width: 25},
-                me.subToolbar,
+                me.total,
+                me.electricity,
+                me.gas,
                 {xtype: "tbfill"},
                 me.previous,
                 me.actions,
@@ -115,5 +108,23 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
         me.callParent(arguments);
 
         me.toolbar.render(this.el);
+    },
+
+    setSpendTypeEnabled : function(enabled) {
+        this.spendTypeEnabled = enabled;
+        this.total.setVisible(enabled);
+        this.electricity.setVisible(enabled);
+        this.gas.setVisible(enabled);
+    },
+
+    getFilterData : function() {
+        var me = this, spendType = me.total.pressed ? "total" : (me.electricity.pressed ? "electricity" : "gas");
+        return {
+            grainType : me.annual.pressed ? "annual" : (me.monthly.pressed ? "monthly" : "daily"),
+            spendType : me.spendTypeEnabled ? spendType : null,
+            previous : me.previous.pressed,
+            actions : me.actions.pressed,
+            weather : me.weather.pressed
+        };
     }
 });
