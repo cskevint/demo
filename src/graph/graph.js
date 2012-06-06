@@ -91,7 +91,6 @@ Ext.ns("C3.PEAT.ux.Graph");
 
     Chart.annual = new Ext.chart.Chart({
         style: "background:#fff",
-//        animate: true,
         store: C3.PEAT.ux.Graph.data.annual,
         shadow: false,
         axes: [{
@@ -103,11 +102,7 @@ Ext.ns("C3.PEAT.ux.Graph");
             dashSize: 0,
             title: "Dollars",
             grid: true
-        }/*,{
-            type: "Category",
-            position: "bottom",
-            fields: ["name"]
-        }*/],
+        }],
         series: [{
             type: "annualbarchart",
             axis: "left",
@@ -149,8 +144,6 @@ Ext.ns("C3.PEAT.ux.Graph");
                             barAttr.fill = "gray";
                     }
                 }
-//                barAttr.x += parseInt(barAttr.width)/2-25;
-//                barAttr.width = "50px";
                 return barAttr;
             }
         }]
@@ -163,10 +156,6 @@ Ext.ns("C3.PEAT.ux.Graph");
     Graph.getMonthlyChart = function(config) {
         var totalSeries = {
             type: "line",
-//        highlight: {
-//            size: 7,
-//            radius: 7
-//        },
             axis: "left",
             xField: "name",
             yField: "total",
@@ -189,10 +178,6 @@ Ext.ns("C3.PEAT.ux.Graph");
 
         var electricitySeries = {
             type: "line",
-//        highlight: {
-//            size: 7,
-//            radius: 7
-//        },
             axis: "left",
             xField: "name",
             yField: "electricity",
@@ -215,10 +200,6 @@ Ext.ns("C3.PEAT.ux.Graph");
 
         var gasSeries = {
             type: "line",
-//        highlight: {
-//            size: 7,
-//            radius: 7
-//        },
             axis: "left",
             xField: "name",
             yField: "gas",
@@ -241,7 +222,6 @@ Ext.ns("C3.PEAT.ux.Graph");
 
         Chart.monthly = new Ext.chart.Chart({
             style: "background:#fff",
-//        animate: true,
             store: C3.PEAT.us.Graph.data.monthly,
             shadow: true,
             legend: true,
@@ -265,9 +245,9 @@ Ext.ns("C3.PEAT.ux.Graph");
         Chart.monthly.on({
             render: function(){
                 setTimeout(function(){
-//                Chart.monthly.series.items[1].hideAll();
-//                Chart.monthly.series.items[2].hideAll();
-                    //Chart.monthly.series.items[0].showAll();
+//                    Chart.monthly.series.items[1].hideAll();
+//                    Chart.monthly.series.items[2].hideAll();
+//                    Chart.monthly.series.items[0].showAll();
                 }, 0);
             }
         });
