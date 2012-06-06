@@ -1,6 +1,17 @@
 Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
     extend : "C3.PEAT.ux.Graph.AbstractChart",
 
+    /*
+     * Default filterData object used to create the series and visuals for the monthly chart.
+     */
+    filterData : {
+        grainType : "annual",
+        spendType : "total",
+        previous : false,
+        actions : false,
+        weather : false
+    },
+
     initComponent : function() {
         var me = this;
 
@@ -70,12 +81,24 @@ Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
             }
         };
 
+        var series = [];
+
+        if(me.filterData.spendType == "total") {
+            series.push(totalSeries);
+        } else if(me.filterData.spendType == "electricity") {
+            series.push(electricitySeries);
+        } else if(me.filterData.spendType == "gas") {
+            series.push(gasSeries);
+        } else {
+            console.log("must be showing non-spending data");
+        }
+
         me.chart = new Ext.chart.Chart({
             width : me.width,
             height : me.height,
             style: "background:#fff",
             store: me.store,
-            shadow: true,
+            shadow: false,
 //            legend: true,
             axes: [{
                 type: "Numeric",
@@ -91,7 +114,7 @@ Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
                 fields: ["name"],
                 grid: true
             }],
-            series: [totalSeries, electricitySeries, gasSeries]
+            series: series
         });
 
         me.chart.on({

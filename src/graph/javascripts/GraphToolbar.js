@@ -13,7 +13,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             toggleGroup: "dateType",
             pressed: true,
             handler: function() {
-                me.fireEvent("filter", { type : "annual" });
+                me.fireEvent("filter", { grainType : "annual", spendType : me.getSpendType() });
             }
         });
 
@@ -21,7 +21,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             text: "Monthly",
             toggleGroup: "dateType",
             handler: function(){
-                me.fireEvent("filter", { type : "monthly" });
+                me.fireEvent("filter", { grainType : "monthly", spendType : me.getSpendType() });
             }
         });
 
@@ -29,16 +29,20 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             text: "Daily",
             toggleGroup: "dateType",
             handler: function() {
-                me.fireEvent("filter", { type : "daily" });
+                me.fireEvent("filter", { grainType : "daily", spendType : me.getSpendType() });
             }
         });
+
+
+
+
 
         me.total = new C3.PEAT.ux.Graph.FilterButton({
             text: "Total",
             toggleGroup: "spendType",
             pressed: true,
             handler: function() {
-                me.fireEvent("filter", { type : "total" });
+                me.fireEvent("filter", { grainType : me.getGrainType(), spendType : "total" });
             }
         });
 
@@ -46,7 +50,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             text: "Electricity",
             toggleGroup: "spendType",
             handler: function() {
-                me.fireEvent("filter", { type : "electricity" });
+                me.fireEvent("filter", { grainType : me.getGrainType(), spendType : "electricity" });
             }
         });
 
@@ -54,9 +58,13 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             text: "Gas",
             toggleGroup: "spendType",
             handler: function() {
-                me.fireEvent("filter", { type : "gas" });
+                me.fireEvent("filter", { grainType : me.getGrainType(), spendType : "gas" });
             }
         });
+
+
+
+
 
         me.previous = new C3.PEAT.ux.Graph.OverlayButton({
             text: "Previous Period",
@@ -117,11 +125,21 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
         this.gas.setVisible(enabled);
     },
 
+    getGrainType : function() {
+        var me = this;
+        return me.annual.pressed ? "annual" : (me.monthly.pressed ? "monthly" : "daily");
+    },
+
+    getSpendType : function() {
+        var me = this;
+        return me.total.pressed ? "total" : (me.electricity.pressed ? "electricity" : "gas");
+    },
+
     getFilterData : function() {
-        var me = this, spendType = me.total.pressed ? "total" : (me.electricity.pressed ? "electricity" : "gas");
+        var me = this;
         return {
-            grainType : me.annual.pressed ? "annual" : (me.monthly.pressed ? "monthly" : "daily"),
-            spendType : me.spendTypeEnabled ? spendType : null,
+            grainType : me.getGrainType(),
+            spendType : me.spendTypeEnabled ? me.getSpendType() : null,
             previous : me.previous.pressed,
             actions : me.actions.pressed,
             weather : me.weather.pressed
