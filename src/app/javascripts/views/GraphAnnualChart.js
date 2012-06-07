@@ -1,5 +1,5 @@
-Ext.define("C3.PEAT.ux.Graph.AnnualChart", {
-    extend : "C3.PEAT.ux.Graph.AbstractChart",
+Ext.define("C3.ui.graph.AnnualChart", {
+    extend : "C3.ui.graph.AbstractChart",
 
     initComponent : function() {
         var me = this;

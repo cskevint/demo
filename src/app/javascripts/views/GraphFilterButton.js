@@ -1,4 +1,4 @@
-Ext.define("C3.PEAT.ux.Graph.FilterButton", {
+Ext.define("C3.ui.graph.FilterButton", {
 
     extend : "Ext.button.Button",
 

@@ -1,4 +1,4 @@
-Ext.define("C3.PEAT.ux.Graph.OverlayButton", {
+Ext.define("C3.ui.graph.OverlayButton", {
 
     extend : "Ext.button.Button",
 

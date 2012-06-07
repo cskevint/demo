@@ -1,4 +1,4 @@
-Ext.define("C3.PEAT.ux.Graph.SwitcherButton", {
+Ext.define("C3.ui.graph.SwitcherButton", {
     extend : "Ext.button.Button",
 
     /*

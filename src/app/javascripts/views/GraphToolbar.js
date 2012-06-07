@@ -1,4 +1,4 @@
-Ext.define("C3.PEAT.ux.Graph.Toolbar", {
+Ext.define("C3.ui.graph.Toolbar", {
 
     extend : "Ext.Component",
 
@@ -8,7 +8,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
         var me = this;
         me.callParent(arguments);
 
-        me.annual = new C3.PEAT.ux.Graph.FilterButton({
+        me.annual = new C3.ui.graph.FilterButton({
             text: "Annual",
             toggleGroup: "dateType",
             pressed: true,
@@ -17,7 +17,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             }
         });
 
-        me.monthly = new C3.PEAT.ux.Graph.FilterButton({
+        me.monthly = new C3.ui.graph.FilterButton({
             text: "Monthly",
             toggleGroup: "dateType",
             handler: function(){
@@ -25,7 +25,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             }
         });
 
-        me.daily = new C3.PEAT.ux.Graph.FilterButton({
+        me.daily = new C3.ui.graph.FilterButton({
             text: "Daily",
             toggleGroup: "dateType",
             handler: function() {
@@ -37,7 +37,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
 
 
 
-        me.total = new C3.PEAT.ux.Graph.FilterButton({
+        me.total = new C3.ui.graph.FilterButton({
             text: "Total",
             toggleGroup: "spendType",
             pressed: true,
@@ -46,7 +46,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             }
         });
 
-        me.electricity = new C3.PEAT.ux.Graph.FilterButton({
+        me.electricity = new C3.ui.graph.FilterButton({
             text: "Electricity",
             toggleGroup: "spendType",
             handler: function() {
@@ -54,7 +54,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             }
         });
 
-        me.gas = new C3.PEAT.ux.Graph.FilterButton({
+        me.gas = new C3.ui.graph.FilterButton({
             text: "Gas",
             toggleGroup: "spendType",
             handler: function() {
@@ -66,7 +66,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
 
 
 
-        me.previous = new C3.PEAT.ux.Graph.OverlayButton({
+        me.previous = new C3.ui.graph.OverlayButton({
             text: "Previous Period",
             enableToggle: true,
             handler: function() {
@@ -74,7 +74,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             }
         });
 
-        me.actions = new C3.PEAT.ux.Graph.OverlayButton({
+        me.actions = new C3.ui.graph.OverlayButton({
             text: "Plan Actions",
             enableToggle: true,
             handler: function() {
@@ -82,7 +82,7 @@ Ext.define("C3.PEAT.ux.Graph.Toolbar", {
             }
         });
 
-        me.weather = new C3.PEAT.ux.Graph.OverlayButton({
+        me.weather = new C3.ui.graph.OverlayButton({
             text: "Weather",
             enableToggle: true,
             handler: function() {

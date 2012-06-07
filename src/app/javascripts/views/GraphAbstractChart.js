@@ -1,4 +1,4 @@
-Ext.define("C3.PEAT.ux.Graph.AbstractChart", {
+Ext.define("C3.ui.graph.AbstractChart", {
     extend : "Ext.Component",
 
     constructor: function(config){

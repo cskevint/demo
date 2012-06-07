@@ -1,4 +1,4 @@
-Ext.ns("C3.PEAT.ux.Graph.data");
+Ext.ns("C3.ui.graph.data");
 
 //date: "5/5/12"
 //date: "4/5/12"
@@ -145,7 +145,7 @@ var dailyData = {
     ]
 };
 
-C3.PEAT.ux.Graph.data.annual = new Ext.data.JsonStore({
+C3.ui.graph.data.annual = new Ext.data.JsonStore({
     fields: ["name", "data"],
     data: [
         {name: "Previous Year", data: 10},
@@ -155,7 +155,7 @@ C3.PEAT.ux.Graph.data.annual = new Ext.data.JsonStore({
     ]
 });
 
-C3.PEAT.ux.Graph.data.monthly = new Ext.data.JsonStore({
+C3.ui.graph.data.monthly = new Ext.data.JsonStore({
     fields: ["name", "total", "electricity", "gas"],
     data: [
         {name: "Jan", total: 10, electricity: 5, gas: 5},

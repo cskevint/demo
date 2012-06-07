@@ -1,5 +1,5 @@
-Ext.define("C3.PEAT.ux.Graph.MonthlyChart", {
-    extend : "C3.PEAT.ux.Graph.AbstractChart",
+Ext.define("C3.ui.graph.MonthlyChart", {
+    extend : "C3.ui.graph.AbstractChart",
 
     /*
      * Default filterData object used to create the series and visuals for the monthly chart.

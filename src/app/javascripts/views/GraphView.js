@@ -1,4 +1,4 @@
-Ext.define("C3.PEAT.ux.Graph.View", {
+Ext.define("C3.ui.graph.View", {
     extend : "Ext.Component",
 
     initComponent : function() {
@@ -7,13 +7,13 @@ Ext.define("C3.PEAT.ux.Graph.View", {
 
         var width = 800, height = 400, chartHeight = 0;
 
-        me.switcher = new C3.PEAT.ux.Graph.Switcher({
+        me.switcher = new C3.ui.graph.Switcher({
             width : width,
             height : 40,
             dock: "top"
         });
 
-        me.toolbar = new C3.PEAT.ux.Graph.Toolbar({
+        me.toolbar = new C3.ui.graph.Toolbar({
             width : width,
             height : 28,
             dock: "top"
@@ -21,10 +21,10 @@ Ext.define("C3.PEAT.ux.Graph.View", {
 
         chartHeight = height - me.switcher.height - me.toolbar.height;
 
-        me.annualChart = new C3.PEAT.ux.Graph.AnnualChart({
+        me.annualChart = new C3.ui.graph.AnnualChart({
             width : width,
             height : chartHeight,
-            store: C3.PEAT.ux.Graph.data.annual
+            store: C3.ui.graph.data.annual
         });
 
         me.panel = new Ext.panel.Panel({
@@ -54,10 +54,10 @@ Ext.define("C3.PEAT.ux.Graph.View", {
 
                 } else if(event.grainType == "monthly") {
 
-                    me.monthlyChart = new C3.PEAT.ux.Graph.MonthlyChart({
+                    me.monthlyChart = new C3.ui.graph.MonthlyChart({
                         width : width,
                         height : chartHeight,
-                        store: C3.PEAT.ux.Graph.data.monthly,
+                        store: C3.ui.graph.data.monthly,
                         filterData : me.toolbar.getFilterData()
                     });
                     me.panel.items.add("monthly", me.monthlyChart);
