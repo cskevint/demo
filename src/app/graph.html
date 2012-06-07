@@ -34,12 +34,12 @@
         // Generate Annual Data
 
         C3.data.annual = new Ext.data.JsonStore({
-            fields: ["name", "data"],
+            fields: ["name", "total", "electricity", "gas"],
             data: [
-                {name: "Previous Year", data: 10},
-                {name: "Current Year", data: 20},
-                {name: "Efficient", data: 10},
-                {name: "Average", data: 50}
+                {name: "previous", total: 60, electricity: 50, gas: 10},
+                {name: "current", total: 50, electricity: 42, gas: 8},
+                {name: "efficient", total: 30, electricity: 25, gas: 5},
+                {name: "average", total: 80, electricity: 60, gas: 20}
             ]
         });
 

@@ -11,7 +11,6 @@ Ext.define("C3.ui.graph.Toolbar", {
         me.annual = new C3.ui.graph.FilterButton({
             text: "Annual",
             toggleGroup: "dateType",
-            pressed: true,
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
             }
@@ -40,7 +39,6 @@ Ext.define("C3.ui.graph.Toolbar", {
         me.total = new C3.ui.graph.FilterButton({
             text: "Total",
             toggleGroup: "spendType",
-            pressed: true,
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
             }
@@ -68,7 +66,6 @@ Ext.define("C3.ui.graph.Toolbar", {
 
         me.previous = new C3.ui.graph.OverlayButton({
             text: "Previous Period",
-            enableToggle: true,
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
             }
@@ -76,7 +73,6 @@ Ext.define("C3.ui.graph.Toolbar", {
 
         me.actions = new C3.ui.graph.OverlayButton({
             text: "Plan Actions",
-            enableToggle: true,
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
             }
@@ -84,11 +80,13 @@ Ext.define("C3.ui.graph.Toolbar", {
 
         me.weather = new C3.ui.graph.OverlayButton({
             text: "Weather",
-            enableToggle: true,
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
             }
         });
+
+
+
 
         me.toolbar = new Ext.toolbar.Toolbar({
             width: me.width,
@@ -109,13 +107,50 @@ Ext.define("C3.ui.graph.Toolbar", {
             ]
         });
 
+        me.applyStateLogic();
+
     },
 
-    onRender: function() {
+    onRender : function() {
         var me = this;
         me.callParent(arguments);
 
         me.toolbar.render(this.el);
+    },
+
+    applyStateLogic : function() {
+        var me = this;
+
+        me.annual.pressed = true;
+        me.total.pressed = true;
+        me.actions.disabled = true;
+        me.weather.disabled = true;
+
+        me.annual.on({
+            click : function(){
+                me.actions.setDisabled(true);
+                me.weather.setDisabled(true);
+
+                // uncomment this if the disabled state should not be displayed when pressed
+                //me.actions.toggle(false, true);
+                //me.weather.toggle(false, true);
+            }
+        });
+
+        me.monthly.on({
+            click : function(){
+                me.actions.setDisabled(false);
+                me.weather.setDisabled(false);
+            }
+        });
+
+        me.daily.on({
+            click : function(){
+                me.actions.setDisabled(false);
+                me.weather.setDisabled(false);
+            }
+        });
+
     },
 
     setSpendTypeEnabled : function(enabled) {

@@ -7,6 +7,7 @@ Ext.define("C3.ui.graph.OverlayButton", {
         me.callParent(arguments);
 
         Ext.apply(this, {
+            enableToggle: true,
             cls: "overlayButton",
             overCls: "overlayButtonOver",
             pressedCls: "overlayButtonPressed"

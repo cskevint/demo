@@ -54,6 +54,13 @@ Ext.define("C3.ui.graph.View", {
 
                 if(event.grainType == "annual") {
 
+                    me.annualChart = new C3.ui.graph.BarDataChart({
+                        width : width,
+                        height : chartHeight,
+                        filterData : me.toolbar.getFilterData(),
+                        store: C3.data.annual
+                    });
+
                     me.panel.items.add("annual", me.annualChart);
 
                 } else if(event.grainType == "monthly") {
