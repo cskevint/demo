@@ -21,6 +21,7 @@
     <script type="text/javascript" src="javascripts/views/GraphAbstractChart.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphBarDataChart.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphPointDataChart.js"></script>
+    <script type="text/javascript" src="javascripts/views/_GraphTheme.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphView.js"></script>
 
     <style type="text/css">
@@ -60,7 +61,12 @@
         function createDataPoints(num) {
             var result = [];
             for(var i = 0; i < num; i++) {
-                var spending = get3Randoms(40, 90), previous = get3Randoms(50, 100), usage = get3Randoms(), weather = get3Randoms(40,70).sort();
+
+                var spending = get3Randoms(30, 90).sort(function(a,b){return b-a}),
+                        previous = get3Randoms(50, 100).sort(function(a,b){return b-a}),
+                        usage = get3Randoms(),
+                        weather = get3Randoms(40,70).sort();
+
                 result.push({
                     key : i,
                     startDate : "5/7/12", endDate : "6/7/12",

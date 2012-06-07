@@ -15,41 +15,54 @@ Ext.define("C3.ui.graph.PointDataChart", {
     initComponent : function() {
         var me = this;
 
-        var series = [], yAxisField = "spendingTotal";
+        var series = [],
+            yAxisField = "spendingTotal",
+            themeId = "1";
 
         if(me.filterData.spendType == "total") {
             series.push(me.createSeries({
                 yFieldKey: "spendingTotal"
             }));
+
         } else if(me.filterData.spendType == "electricity") {
             series.push(me.createSeries({
                 yFieldKey: "spendingElectricity"
             }));
+
         } else if(me.filterData.spendType == "gas") {
             series.push(me.createSeries({
                 yFieldKey: "spendingGas"
             }));
+
         } else {
             console.log("must be showing non-spending data");
         }
 
         if(me.filterData.previous) {
+            themeId += "1";
+
             if(me.filterData.spendType == "total") {
                 series.push(me.createSeries({
                     yFieldKey: "previousTotal"
                 }));
+
             } else if(me.filterData.spendType == "electricity") {
                 series.push(me.createSeries({
                     yFieldKey: "previousElectricity"
                 }));
+
             } else if(me.filterData.spendType == "gas") {
                 series.push(me.createSeries({
                     yFieldKey: "previousGas"
                 }));
             }
+        } else {
+            themeId += "0";
         }
 
         if(me.filterData.weather) {
+            themeId += "1";
+
             series.push(me.createSeries({
                 yFieldKey: "weatherLow", weather : true
             }));
@@ -57,15 +70,23 @@ Ext.define("C3.ui.graph.PointDataChart", {
             series.push(me.createSeries({
                 yFieldKey: "weatherHigh", weather : true
             }));
+        } else {
+            themeId += "0";
         }
 
         me.chart = new Ext.chart.Chart({
+
             width : me.width,
             height : me.height,
+
             style: "background:#fff",
+
             store: me.store,
+
+            theme : "PointDataTheme" + themeId,
+
             shadow: false,
-//            legend: true,
+
             axes: [{
                 type: "Numeric",
                 minimum: 0,
@@ -80,6 +101,7 @@ Ext.define("C3.ui.graph.PointDataChart", {
                 fields: ["key"],
                 grid: true
             }],
+
             series: series
         });
 
