@@ -108,8 +108,9 @@ Ext.define("C3.ui.graph.PointDataChart", {
     },
 
     /*
-     *  Takes a config object with these posible values:
-     *  yFieldKey : the data property to chart
+     *  Takes a config object with these possible values:
+     *  yFieldKey {String, required} the data property to chart
+     *  weather {Boolean} whether this series is for weather data or not
      */
     createSeries : function(config) {
         Ext.applyIf(config, {

@@ -45,7 +45,7 @@
 
         // Generate Monthly Data
 
-        function get3Randoms(min, max) {
+        C3.data.get3Randoms = function(min, max) {
             if(!min) min = 0;
             if(!max) max = 100;
             var result = [];
@@ -56,16 +56,16 @@
             result[1] += min;
             result[2] += min;
             return result;
-        }
+        };
 
-        function createDataPoints(num) {
+        C3.data.createDataPoints = function(num) {
             var result = [];
             for(var i = 0; i < num; i++) {
 
-                var spending = get3Randoms(30, 90).sort(function(a,b){return b-a}),
-                        previous = get3Randoms(50, 100).sort(function(a,b){return b-a}),
-                        usage = get3Randoms(),
-                        weather = get3Randoms(40,70).sort();
+                var spending = C3.data.get3Randoms(30, 90).sort(function(a,b){return b-a}),
+                        previous = C3.data.get3Randoms(50, 100).sort(function(a,b){return b-a}),
+                        usage = C3.data.get3Randoms(),
+                        weather = C3.data.get3Randoms(40,70).sort();
 
                 result.push({
                     key : i,
@@ -77,10 +77,10 @@
                 });
             }
             return result;
-        }
+        };
 
-        C3.data.monthly = createDataPoints(12);
-        C3.data.daily = createDataPoints(30);
+        C3.data.monthly = C3.data.createDataPoints(12);
+        C3.data.daily = C3.data.createDataPoints(30);
 
         Ext.onReady(function () {
             new C3.ui.graph.View({
