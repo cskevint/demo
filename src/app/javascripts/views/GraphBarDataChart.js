@@ -1,4 +1,4 @@
-Ext.define("C3.ui.graph.AnnualChart", {
+Ext.define("C3.ui.graph.BarDataChart", {
     extend : "C3.ui.graph.AbstractChart",
 
     initComponent : function() {

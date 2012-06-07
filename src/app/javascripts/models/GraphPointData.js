@@ -1,4 +1,4 @@
-Ext.define("C3.data.graph.Monthly", {
+Ext.define("C3.data.graph.PointData", {
     extend: 'Ext.data.Model',
     fields: [
         {name: 'key', type: 'int'},

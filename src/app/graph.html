@@ -6,11 +6,11 @@
     <link rel="stylesheet" type="text/css" href="../extjs-4.1.0/resources/css/ext-all.css"/>
     <script type="text/javascript" src="../extjs-4.1.0/ext-all-debug.js"></script>
 
-    <script type="text/javascript" src="javascripts/models/GraphAnnual.js"></script>
-    <script type="text/javascript" src="javascripts/models/GraphMonthly.js"></script>
+    <script type="text/javascript" src="javascripts/models/GraphBarData.js"></script>
+    <script type="text/javascript" src="javascripts/models/GraphPointData.js"></script>
 
-    <script type="text/javascript" src="javascripts/stores/GraphAnnualStore.js"></script>
-    <script type="text/javascript" src="javascripts/stores/GraphMonthlyStore.js"></script>
+    <script type="text/javascript" src="javascripts/stores/GraphBarData.js"></script>
+    <script type="text/javascript" src="javascripts/stores/GraphPointDataStore.js"></script>
 
     <script type="text/javascript" src="javascripts/views/GraphSwitcher.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphSwitcherButton.js"></script>
@@ -19,8 +19,8 @@
     <script type="text/javascript" src="javascripts/views/GraphAnnualSeries.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphToolbar.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphAbstractChart.js"></script>
-    <script type="text/javascript" src="javascripts/views/GraphAnnualChart.js"></script>
-    <script type="text/javascript" src="javascripts/views/GraphMonthlyChart.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphBarDataChart.js"></script>
+    <script type="text/javascript" src="javascripts/views/GraphPointDataChart.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphView.js"></script>
 
     <style type="text/css">
@@ -60,7 +60,7 @@
         function createDataPoints(num) {
             var result = [];
             for(var i = 0; i < num; i++) {
-                var spending = get3Randoms(), previous = get3Randoms(), usage = get3Randoms(), weather = get3Randoms(40,70).sort();
+                var spending = get3Randoms(40, 90), previous = get3Randoms(50, 100), usage = get3Randoms(), weather = get3Randoms(40,70).sort();
                 result.push({
                     key : i,
                     startDate : "5/7/12", endDate : "6/7/12",

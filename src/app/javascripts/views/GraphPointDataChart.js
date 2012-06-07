@@ -1,4 +1,4 @@
-Ext.define("C3.ui.graph.MonthlyChart", {
+Ext.define("C3.ui.graph.PointDataChart", {
     extend : "C3.ui.graph.AbstractChart",
 
     /*
@@ -51,7 +51,11 @@ Ext.define("C3.ui.graph.MonthlyChart", {
 
         if(me.filterData.weather) {
             series.push(me.createSeries({
-                yFieldKey: "weatherAverage"
+                yFieldKey: "weatherLow", weather : true
+            }));
+
+            series.push(me.createSeries({
+                yFieldKey: "weatherHigh", weather : true
             }));
         }
 
@@ -86,6 +90,10 @@ Ext.define("C3.ui.graph.MonthlyChart", {
      *  yFieldKey : the data property to chart
      */
     createSeries : function(config) {
+        Ext.applyIf(config, {
+            weather : false
+        });
+
         var result = {
             type: "line",
             axis: "left",
@@ -94,6 +102,8 @@ Ext.define("C3.ui.graph.MonthlyChart", {
             yField: config.yFieldKey,
 
             showMarkers : true,
+
+            fill : config.weather,
 
             markerConfig: {
                 type: "circle",
@@ -111,6 +121,15 @@ Ext.define("C3.ui.graph.MonthlyChart", {
                 }
             }
         };
+
+        if(config.weather) {
+            result.markerConfig = {
+                type: "circle",
+                radius: 4,
+                'stroke-width': 0
+            }
+        }
+
         return result;
     }
 });

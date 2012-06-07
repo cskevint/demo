@@ -25,7 +25,7 @@ Ext.define("C3.ui.graph.View", {
 
         chartHeight = height - me.switcher.height - me.toolbar.height;
 
-        me.annualChart = new C3.ui.graph.AnnualChart({
+        me.annualChart = new C3.ui.graph.BarDataChart({
             width : width,
             height : chartHeight,
             store: C3.data.annual
@@ -58,10 +58,10 @@ Ext.define("C3.ui.graph.View", {
 
                 } else if(event.grainType == "monthly") {
 
-                    var monthlyChart = new C3.ui.graph.MonthlyChart({
+                    var monthlyChart = new C3.ui.graph.PointDataChart({
                         width : width,
                         height : chartHeight,
-                        store: new C3.store.graph.Monthly({
+                        store: new C3.store.graph.PointData({
                             data : me.monthlyRawData
                         }),
                         filterData : me.toolbar.getFilterData()
@@ -70,15 +70,15 @@ Ext.define("C3.ui.graph.View", {
 
                 } else if(event.grainType == "daily") {
 
-                    var monthlyChart = new C3.ui.graph.MonthlyChart({
+                    var dailyChart = new C3.ui.graph.PointDataChart({
                         width : width,
                         height : chartHeight,
-                        store: new C3.store.graph.Monthly({
+                        store: new C3.store.graph.PointData({
                             data : me.dailyRawData
                         }),
                         filterData : me.toolbar.getFilterData()
                     });
-                    me.panel.items.add("monthly", monthlyChart);
+                    me.panel.items.add("monthly", dailyChart);
 
                 }
 

@@ -1,6 +1,6 @@
-Ext.define("C3.store.graph.Monthly", {
+Ext.define("C3.store.graph.PointData", {
     extend: 'Ext.data.JsonStore',
-    model: 'C3.data.graph.Monthly'
+    model: 'C3.data.graph.PointData'
 //    fields: [
 //        "key","startDate","endDate",
 //        "spendingTotal","spendingElectricity","spendingGas",
