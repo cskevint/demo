@@ -1,6 +1,8 @@
 Ext.define("C3.ui.graph.View", {
     extend : "Ext.Component",
 
+    dailyRawData : null,
+
     monthlyRawData : null,
 
     initComponent : function() {
@@ -47,7 +49,7 @@ Ext.define("C3.ui.graph.View", {
         });
 
         me.toolbar.on({
-            filter : function(event){
+            filterChange : function(event){
                 me.panel.items.clear();
 
                 if(event.grainType == "annual") {
@@ -56,7 +58,7 @@ Ext.define("C3.ui.graph.View", {
 
                 } else if(event.grainType == "monthly") {
 
-                    me.monthlyChart = new C3.ui.graph.MonthlyChart({
+                    var monthlyChart = new C3.ui.graph.MonthlyChart({
                         width : width,
                         height : chartHeight,
                         store: new C3.store.graph.Monthly({
@@ -64,16 +66,23 @@ Ext.define("C3.ui.graph.View", {
                         }),
                         filterData : me.toolbar.getFilterData()
                     });
-                    me.panel.items.add("monthly", me.monthlyChart);
+                    me.panel.items.add("monthly", monthlyChart);
 
                 } else if(event.grainType == "daily") {
+
+                    var monthlyChart = new C3.ui.graph.MonthlyChart({
+                        width : width,
+                        height : chartHeight,
+                        store: new C3.store.graph.Monthly({
+                            data : me.dailyRawData
+                        }),
+                        filterData : me.toolbar.getFilterData()
+                    });
+                    me.panel.items.add("monthly", monthlyChart);
 
                 }
 
                 me.panel.doLayout();
-            },
-            overlay : function(event) {
-                console.log(me.toolbar.getFilterData());
             }
         });
     },

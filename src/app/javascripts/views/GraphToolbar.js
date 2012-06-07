@@ -13,7 +13,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             toggleGroup: "dateType",
             pressed: true,
             handler: function() {
-                me.fireEvent("filter", { grainType : "annual", spendType : me.getSpendType() });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
@@ -21,7 +21,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             text: "Monthly",
             toggleGroup: "dateType",
             handler: function(){
-                me.fireEvent("filter", { grainType : "monthly", spendType : me.getSpendType() });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
@@ -29,7 +29,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             text: "Daily",
             toggleGroup: "dateType",
             handler: function() {
-                me.fireEvent("filter", { grainType : "daily", spendType : me.getSpendType() });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
@@ -42,7 +42,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             toggleGroup: "spendType",
             pressed: true,
             handler: function() {
-                me.fireEvent("filter", { grainType : me.getGrainType(), spendType : "total" });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
@@ -50,7 +50,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             text: "Electricity",
             toggleGroup: "spendType",
             handler: function() {
-                me.fireEvent("filter", { grainType : me.getGrainType(), spendType : "electricity" });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
@@ -58,7 +58,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             text: "Gas",
             toggleGroup: "spendType",
             handler: function() {
-                me.fireEvent("filter", { grainType : me.getGrainType(), spendType : "gas" });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
@@ -70,7 +70,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             text: "Previous Period",
             enableToggle: true,
             handler: function() {
-                me.fireEvent("overlay", { type : "previous" });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
@@ -78,7 +78,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             text: "Plan Actions",
             enableToggle: true,
             handler: function() {
-                me.fireEvent("overlay", { type : "actions" });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
@@ -86,7 +86,7 @@ Ext.define("C3.ui.graph.Toolbar", {
             text: "Weather",
             enableToggle: true,
             handler: function() {
-                me.fireEvent("overlay", { type : "weather" });
+                me.fireEvent("filterChange", me.getFilterData());
             }
         });
 

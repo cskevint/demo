@@ -44,30 +44,41 @@
 
         // Generate Monthly Data
 
-        function get3Randoms() {
+        function get3Randoms(min, max) {
+            if(!min) min = 0;
+            if(!max) max = 100;
             var result = [];
-            result.push(Math.floor(Math.random()*100));
-            result.push(Math.floor(Math.random()*result[0]));
-            result.push(result[0]-result[1]);
+            result.push(Math.floor(Math.random() * (max-min)));
+            result.push(Math.floor(Math.random() * result[0]));
+            result.push(result[0] - result[1]);
+            result[0] += min;
+            result[1] += min;
+            result[2] += min;
             return result;
         }
 
-        C3.data.monthly = [];
-
-        for(var i = 0; i < 12; i++) {
-            var spending = get3Randoms(), previous = get3Randoms(), usage = get3Randoms(), weather = get3Randoms().sort();
-            C3.data.monthly.push({
-                key : i,
-                startDate : "5/7/12", endDate : "6/7/12",
-                spendingTotal : spending[0], spendingElectricity : spending[1], spendingGas : spending[2],
-                previousTotal : previous[0], previousElectricity : previous[1], previousGas : previous[2],
-                electricityUsage : usage[0], gasUsage : usage[1], co2usage : usage[2],
-                weatherLow : weather[0], weatherAverage : weather[1], weatherHigh : weather[2]
-            });
+        function createDataPoints(num) {
+            var result = [];
+            for(var i = 0; i < num; i++) {
+                var spending = get3Randoms(), previous = get3Randoms(), usage = get3Randoms(), weather = get3Randoms(40,70).sort();
+                result.push({
+                    key : i,
+                    startDate : "5/7/12", endDate : "6/7/12",
+                    spendingTotal : spending[0], spendingElectricity : spending[1], spendingGas : spending[2],
+                    previousTotal : previous[0], previousElectricity : previous[1], previousGas : previous[2],
+                    electricityUsage : usage[0], gasUsage : usage[1], co2usage : usage[2],
+                    weatherLow : weather[0], weatherAverage : weather[1], weatherHigh : weather[2]
+                });
+            }
+            return result;
         }
+
+        C3.data.monthly = createDataPoints(12);
+        C3.data.daily = createDataPoints(30);
 
         Ext.onReady(function () {
             new C3.ui.graph.View({
+                dailyRawData : C3.data.daily,
                 monthlyRawData : C3.data.monthly,
                 renderTo : "chart"
             });

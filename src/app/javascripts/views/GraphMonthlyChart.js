@@ -15,86 +15,44 @@ Ext.define("C3.ui.graph.MonthlyChart", {
     initComponent : function() {
         var me = this;
 
-        var totalSeries = {
-            type: "line",
-            axis: "left",
-
-            xField: "key",
-            yField: "spendingTotal",
-
-            showMarkers : true,
-
-            markerConfig: {
-                type: "circle",
-                size: 4,
-                radius: 4,
-                'stroke-width': 1
-            },
-
-            tips: {
-                trackMouse: true,
-                width: 60,
-                height: 20,
-                renderer: function(storeItem, item) {
-                    this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
-                }
-            }
-        };
-
-        var electricitySeries = {
-            type: "line",
-            axis: "left",
-            xField: "key",
-            yField: "spendingElectricity",
-            showMarkers : true,
-            markerConfig: {
-                type: "circle",
-                size: 4,
-                radius: 4,
-                'stroke-width': 1
-            },
-            tips: {
-                trackMouse: true,
-                width: 60,
-                height: 20,
-                renderer: function(storeItem, item) {
-                    this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
-                }
-            }
-        };
-
-        var gasSeries = {
-            type: "line",
-            axis: "left",
-            xField: "key",
-            yField: "spendingGas",
-            showMarkers : true,
-            markerConfig: {
-                type: "circle",
-                size: 4,
-                radius: 4,
-                'stroke-width': 1
-            },
-            tips: {
-                trackMouse: true,
-                width: 60,
-                height: 20,
-                renderer: function(storeItem, item) {
-                    this.setTitle(storeItem.get('name') + ':&nbsp;$' + storeItem.get('total'));
-                }
-            }
-        };
-
         var series = [], yAxisField = "spendingTotal";
 
         if(me.filterData.spendType == "total") {
-            series.push(totalSeries);
+            series.push(me.createSeries({
+                yFieldKey: "spendingTotal"
+            }));
         } else if(me.filterData.spendType == "electricity") {
-            series.push(electricitySeries);
+            series.push(me.createSeries({
+                yFieldKey: "spendingElectricity"
+            }));
         } else if(me.filterData.spendType == "gas") {
-            series.push(gasSeries);
+            series.push(me.createSeries({
+                yFieldKey: "spendingGas"
+            }));
         } else {
             console.log("must be showing non-spending data");
+        }
+
+        if(me.filterData.previous) {
+            if(me.filterData.spendType == "total") {
+                series.push(me.createSeries({
+                    yFieldKey: "previousTotal"
+                }));
+            } else if(me.filterData.spendType == "electricity") {
+                series.push(me.createSeries({
+                    yFieldKey: "previousElectricity"
+                }));
+            } else if(me.filterData.spendType == "gas") {
+                series.push(me.createSeries({
+                    yFieldKey: "previousGas"
+                }));
+            }
+        }
+
+        if(me.filterData.weather) {
+            series.push(me.createSeries({
+                yFieldKey: "weatherAverage"
+            }));
         }
 
         me.chart = new Ext.chart.Chart({
@@ -115,20 +73,44 @@ Ext.define("C3.ui.graph.MonthlyChart", {
             }, {
                 type: "Category",
                 position: "bottom",
-                fields: ["name"],
+                fields: ["key"],
                 grid: true
             }],
             series: series
         });
 
-        me.chart.on({
-            render: function(){
-                setTimeout(function(){
-//                    Chart.monthly.series.items[1].hideAll();
-//                    Chart.monthly.series.items[2].hideAll();
-//                    Chart.monthly.series.items[0].showAll();
-                }, 0);
+    },
+
+    /*
+     *  Takes a config object with these posible values:
+     *  yFieldKey : the data property to chart
+     */
+    createSeries : function(config) {
+        var result = {
+            type: "line",
+            axis: "left",
+
+            xField: "key",
+            yField: config.yFieldKey,
+
+            showMarkers : true,
+
+            markerConfig: {
+                type: "circle",
+                size: 4,
+                radius: 4,
+                'stroke-width': 1
+            },
+
+            tips: {
+                trackMouse: true,
+                width: 60,
+                height: 20,
+                renderer: function(storeItem, item) {
+                    this.setTitle(storeItem.get('startDate') + ':&nbsp;$' + storeItem.get(config.yFieldKey));
+                }
             }
-        });
+        };
+        return result;
     }
 });
