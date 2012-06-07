@@ -1,6 +1,8 @@
 Ext.define("C3.ui.graph.View", {
     extend : "Ext.Component",
 
+    monthlyRawData : null,
+
     initComponent : function() {
         var me = this;
         me.callParent(arguments);
@@ -24,7 +26,7 @@ Ext.define("C3.ui.graph.View", {
         me.annualChart = new C3.ui.graph.AnnualChart({
             width : width,
             height : chartHeight,
-            store: C3.ui.graph.data.annual
+            store: C3.data.annual
         });
 
         me.panel = new Ext.panel.Panel({
@@ -57,7 +59,9 @@ Ext.define("C3.ui.graph.View", {
                     me.monthlyChart = new C3.ui.graph.MonthlyChart({
                         width : width,
                         height : chartHeight,
-                        store: C3.ui.graph.data.monthly,
+                        store: new C3.store.graph.Monthly({
+                            data : me.monthlyRawData
+                        }),
                         filterData : me.toolbar.getFilterData()
                     });
                     me.panel.items.add("monthly", me.monthlyChart);

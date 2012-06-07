@@ -18,15 +18,19 @@ Ext.define("C3.ui.graph.MonthlyChart", {
         var totalSeries = {
             type: "line",
             axis: "left",
-            xField: "name",
-            yField: "total",
+
+            xField: "key",
+            yField: "spendingTotal",
+
             showMarkers : true,
+
             markerConfig: {
                 type: "circle",
                 size: 4,
                 radius: 4,
                 'stroke-width': 1
             },
+
             tips: {
                 trackMouse: true,
                 width: 60,
@@ -40,8 +44,8 @@ Ext.define("C3.ui.graph.MonthlyChart", {
         var electricitySeries = {
             type: "line",
             axis: "left",
-            xField: "name",
-            yField: "electricity",
+            xField: "key",
+            yField: "spendingElectricity",
             showMarkers : true,
             markerConfig: {
                 type: "circle",
@@ -62,8 +66,8 @@ Ext.define("C3.ui.graph.MonthlyChart", {
         var gasSeries = {
             type: "line",
             axis: "left",
-            xField: "name",
-            yField: "gas",
+            xField: "key",
+            yField: "spendingGas",
             showMarkers : true,
             markerConfig: {
                 type: "circle",
@@ -81,7 +85,7 @@ Ext.define("C3.ui.graph.MonthlyChart", {
             }
         };
 
-        var series = [];
+        var series = [], yAxisField = "spendingTotal";
 
         if(me.filterData.spendType == "total") {
             series.push(totalSeries);
@@ -105,7 +109,7 @@ Ext.define("C3.ui.graph.MonthlyChart", {
                 minimum: 0,
                 maximum: 100,
                 position: "left",
-                fields: ["total"],
+                fields: [ yAxisField ],
 //                title: "Dollars",
                 minorTickSteps: 1
             }, {

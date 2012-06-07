@@ -6,6 +6,12 @@
     <link rel="stylesheet" type="text/css" href="../extjs-4.1.0/resources/css/ext-all.css"/>
     <script type="text/javascript" src="../extjs-4.1.0/ext-all-debug.js"></script>
 
+    <script type="text/javascript" src="javascripts/models/GraphAnnual.js"></script>
+    <script type="text/javascript" src="javascripts/models/GraphMonthly.js"></script>
+
+    <script type="text/javascript" src="javascripts/stores/GraphAnnualStore.js"></script>
+    <script type="text/javascript" src="javascripts/stores/GraphMonthlyStore.js"></script>
+
     <script type="text/javascript" src="javascripts/views/GraphSwitcher.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphSwitcherButton.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphFilterButton.js"></script>
@@ -17,16 +23,53 @@
     <script type="text/javascript" src="javascripts/views/GraphMonthlyChart.js"></script>
     <script type="text/javascript" src="javascripts/views/GraphView.js"></script>
 
-    <script type="text/javascript" src="graph.data.js"></script>
-
     <style type="text/css">
         @import url("../prototype/main.css");
         @import url("stylesheets/graph.css");
     </style>
     <script type="text/javascript">
+        Ext.ns("C3.data");
+
+        // Generate Annual Data
+
+        C3.data.annual = new Ext.data.JsonStore({
+            fields: ["name", "data"],
+            data: [
+                {name: "Previous Year", data: 10},
+                {name: "Current Year", data: 20},
+                {name: "Efficient", data: 10},
+                {name: "Average", data: 50}
+            ]
+        });
+
+        // Generate Monthly Data
+
+        function get3Randoms() {
+            var result = [];
+            result.push(Math.floor(Math.random()*100));
+            result.push(Math.floor(Math.random()*result[0]));
+            result.push(result[0]-result[1]);
+            return result;
+        }
+
+        C3.data.monthly = [];
+
+        for(var i = 0; i < 12; i++) {
+            var spending = get3Randoms(), previous = get3Randoms(), usage = get3Randoms(), weather = get3Randoms().sort();
+            C3.data.monthly.push({
+                key : i,
+                startDate : "5/7/12", endDate : "6/7/12",
+                spendingTotal : spending[0], spendingElectricity : spending[1], spendingGas : spending[2],
+                previousTotal : previous[0], previousElectricity : previous[1], previousGas : previous[2],
+                electricityUsage : usage[0], gasUsage : usage[1], co2usage : usage[2],
+                weatherLow : weather[0], weatherAverage : weather[1], weatherHigh : weather[2]
+            });
+        }
+
         Ext.onReady(function () {
             new C3.ui.graph.View({
-                renderTo: "chart"
+                monthlyRawData : C3.data.monthly,
+                renderTo : "chart"
             });
         });
     </script>
