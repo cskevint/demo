@@ -124,8 +124,8 @@ Ext.define("C3.ui.graph.BarDataChart", {
                         '<div style="margin-bottom:5px;">{accountName}</div>',
                         '<div style="margin-bottom:15px;">'+C3.i18n.current.annualEnergySpending+'</div>',
                         '<div style="margin-bottom:25px;">'+C3.i18n.current.howDoYouCompare+'</div>',
-                        '<div style="margin-bottom:5px;margin-left: 30px">'+C3.i18n.applyArguments(C3.i18n.current.spendSimilar,"{similar}")+'</div>',
-                        '<div style="margin-left:30px;">'+C3.i18n.applyArguments(C3.i18n.current.spendEfficient,"{efficient}")+'</div>',
+                        '<div style="margin-bottom:5px;margin-left: 30px">'+C3.i18n.applyArgs(C3.i18n.current.spendSimilar,"{similar}")+'</div>',
+                        '<div style="margin-left:30px;">'+C3.i18n.applyArgs(C3.i18n.current.spendEfficient,"{efficient}")+'</div>',
                     '</div>',
                 '</tpl>'
             )

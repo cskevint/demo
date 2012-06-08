@@ -74,9 +74,13 @@ Ext.define("C3.ui.graph.View", {
         me.panel.items.clear();
 
         if(filterData.usage == "buildingUse") {
-            me.panel.items.add("button", new Ext.button.Button({
-                text:"Building End Use"
-            }));
+            me.donutChart = new C3.ui.graph.DonutDataChart({
+                width : me.width,
+                height : me.chartHeight,
+                filterData : filterData
+            });
+
+            me.panel.items.add("donut", me.donutChart);
 
         } else {
             if(filterData.grainType == "annual") {
