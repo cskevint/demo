@@ -122,10 +122,10 @@ Ext.define("C3.ui.graph.BarDataChart", {
                 '<tpl for=".">',
                     '<div style="margin-top:50px">',
                         '<div style="margin-bottom:5px;">{accountName}</div>',
-                        '<div style="margin-bottom:15px;">ANNUAL ENERGY SPENDING</div>',
-                        '<div style="margin-bottom:25px;">How do you compare to similar businesses</div>',
-                        '<div style="margin-bottom:5px;margin-left: 30px">You spend {similar} more than similar businesses</div>',
-                        '<div style="margin-left:30px;">You spend {efficient} more than energy efficient businesses</div>',
+                        '<div style="margin-bottom:15px;">'+C3.i18n.current.annualEnergySpending+'</div>',
+                        '<div style="margin-bottom:25px;">'+C3.i18n.current.howDoYouCompare+'</div>',
+                        '<div style="margin-bottom:5px;margin-left: 30px">'+C3.i18n.applyArguments(C3.i18n.current.spendSimilar,"{similar}")+'</div>',
+                        '<div style="margin-left:30px;">'+C3.i18n.applyArguments(C3.i18n.current.spendEfficient,"{efficient}")+'</div>',
                     '</div>',
                 '</tpl>'
             )

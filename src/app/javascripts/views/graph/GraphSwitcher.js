@@ -11,31 +11,31 @@ Ext.define("C3.ui.graph.Switcher", {
             eventType : "spending",
             toggleGroup: "switcher",
             pressed: true,
-            text: "Spending<br/>$1000"
+            text: C3.i18n.current.spending+"<br/>$1000"
         });
 
         me.electricity = new C3.ui.graph.SwitcherButton({
             eventType : "electricity",
             toggleGroup: "switcher",
-            text: "Electricity<br/>100kWh"
+            text: C3.i18n.current.electricity+"<br/>100kWh"
         });
 
         me.gas = new C3.ui.graph.SwitcherButton({
             eventType : "gas",
             toggleGroup: "switcher",
-            text: "Gas<br/>50therms"
+            text: C3.i18n.current.gas+"<br/>50therms"
         });
 
         me.co2 = new C3.ui.graph.SwitcherButton({
             eventType : "co2",
             toggleGroup: "switcher",
-            text: "CO<sub>2</sub><br/>10tons</sub>"
+            text: C3.i18n.current.co2+"<br/>10tons</sub>"
         });
 
         me.buildingUse = new C3.ui.graph.SwitcherButton({
             eventType : "buildingUse",
             toggleGroup: "switcher",
-            text: "Building End Use"
+            text: C3.i18n.current.buildingEndUse
         });
 
         me.buildingUse.addCls("last");

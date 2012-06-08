@@ -9,7 +9,7 @@ Ext.define("C3.ui.graph.Toolbar", {
         me.callParent(arguments);
 
         me.annual = new C3.ui.graph.FilterButton({
-            text: "Annual",
+            text: C3.i18n.current.annual,
             toggleGroup: "dateType",
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
@@ -17,7 +17,7 @@ Ext.define("C3.ui.graph.Toolbar", {
         });
 
         me.monthly = new C3.ui.graph.FilterButton({
-            text: "Monthly",
+            text: C3.i18n.current.monthly,
             toggleGroup: "dateType",
             handler: function(){
                 me.fireEvent("filterChange", me.getFilterData());
@@ -25,7 +25,7 @@ Ext.define("C3.ui.graph.Toolbar", {
         });
 
         me.daily = new C3.ui.graph.FilterButton({
-            text: "Daily",
+            text: C3.i18n.current.daily,
             toggleGroup: "dateType",
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
@@ -37,7 +37,7 @@ Ext.define("C3.ui.graph.Toolbar", {
 
 
         me.total = new C3.ui.graph.FilterButton({
-            text: "Total",
+            text: C3.i18n.current.total,
             toggleGroup: "spendType",
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
@@ -45,7 +45,7 @@ Ext.define("C3.ui.graph.Toolbar", {
         });
 
         me.electricity = new C3.ui.graph.FilterButton({
-            text: "Electricity",
+            text: C3.i18n.current.electricity,
             toggleGroup: "spendType",
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
@@ -53,7 +53,7 @@ Ext.define("C3.ui.graph.Toolbar", {
         });
 
         me.gas = new C3.ui.graph.FilterButton({
-            text: "Gas",
+            text: C3.i18n.current.gas,
             toggleGroup: "spendType",
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
@@ -65,21 +65,21 @@ Ext.define("C3.ui.graph.Toolbar", {
 
 
         me.previous = new C3.ui.graph.OverlayButton({
-            text: "Previous Period",
+            text: C3.i18n.current.previousPeriod,
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
         me.actions = new C3.ui.graph.OverlayButton({
-            text: "Plan Actions",
+            text: C3.i18n.current.planActions,
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
             }
         });
 
         me.weather = new C3.ui.graph.OverlayButton({
-            text: "Weather",
+            text: C3.i18n.current.weather,
             handler: function() {
                 me.fireEvent("filterChange", me.getFilterData());
             }
