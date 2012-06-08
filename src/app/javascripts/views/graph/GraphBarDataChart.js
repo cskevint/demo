@@ -31,11 +31,7 @@ Ext.define("C3.ui.graph.BarDataChart", {
             yAxisField = "co2Usage";
         }
 
-        if(!me.filterData.previous) {
-            me.store.filter("type",/(current|average|efficient)/);
-        } else {
-            me.store.clearFilter();
-        }
+        me.store.includePrevious(me.filterData.previous);
 
         me.chartInner = new Ext.chart.Chart({
             flex : 1,
@@ -49,7 +45,6 @@ Ext.define("C3.ui.graph.BarDataChart", {
                 position: "left",
                 fields: ["data"],
                 dashSize: 0,
-//                title: "Dollars",
                 grid: true
             }],
             series: [{
