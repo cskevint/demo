@@ -73,43 +73,50 @@ Ext.define("C3.ui.graph.View", {
         var me = this, filterData = me.getWrappedFilterData();
         me.panel.items.clear();
 
-        if(filterData.grainType == "annual") {
+        if(filterData.usage == "buildingUse") {
+            me.panel.items.add("button", new Ext.button.Button({
+                text:"Building End Use"
+            }));
 
-            me.annualChart = new C3.ui.graph.BarDataChart({
-                width : me.width,
-                height : me.chartHeight,
-                filterData : filterData,
-                store: new C3.store.graph.BarData({
-                    data : me.annualRawData
-                })
-            });
+        } else {
+            if(filterData.grainType == "annual") {
 
-            me.panel.items.add("annual", me.annualChart);
+                me.annualChart = new C3.ui.graph.BarDataChart({
+                    width : me.width,
+                    height : me.chartHeight,
+                    filterData : filterData,
+                    store: new C3.store.graph.BarData({
+                        data : me.annualRawData
+                    })
+                });
 
-        } else if(filterData.grainType == "monthly") {
+                me.panel.items.add("annual", me.annualChart);
 
-            var monthlyChart = new C3.ui.graph.PointDataChart({
-                width : me.width,
-                height : me.chartHeight,
-                store: new C3.store.graph.PointData({
-                    data : me.monthlyRawData
-                }),
-                filterData : me.getWrappedFilterData()
-            });
-            me.panel.items.add("monthly", monthlyChart);
+            } else if(filterData.grainType == "monthly") {
 
-        } else if(filterData.grainType == "daily") {
+                var monthlyChart = new C3.ui.graph.PointDataChart({
+                    width : me.width,
+                    height : me.chartHeight,
+                    store: new C3.store.graph.PointData({
+                        data : me.monthlyRawData
+                    }),
+                    filterData : me.getWrappedFilterData()
+                });
+                me.panel.items.add("monthly", monthlyChart);
 
-            var dailyChart = new C3.ui.graph.PointDataChart({
-                width : me.width,
-                height : me.chartHeight,
-                store: new C3.store.graph.PointData({
-                    data : me.dailyRawData
-                }),
-                filterData : me.getWrappedFilterData()
-            });
-            me.panel.items.add("monthly", dailyChart);
+            } else if(filterData.grainType == "daily") {
 
+                var dailyChart = new C3.ui.graph.PointDataChart({
+                    width : me.width,
+                    height : me.chartHeight,
+                    store: new C3.store.graph.PointData({
+                        data : me.dailyRawData
+                    }),
+                    filterData : me.getWrappedFilterData()
+                });
+                me.panel.items.add("monthly", dailyChart);
+
+            }
         }
 
         me.panel.doLayout();

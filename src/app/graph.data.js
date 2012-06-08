@@ -27,7 +27,7 @@ C3.data.createDataPoints = function(num) {
             startDate : "5/7/12", endDate : "6/7/12",
             spendingTotal : spending[0], spendingElectricity : spending[1], spendingGas : spending[2],
             previousTotal : previous[0], previousElectricity : previous[1], previousGas : previous[2],
-            electricityUsage : usage[0], gasUsage : usage[1], co2usage : usage[2],
+            electricityUsage : usage[0], gasUsage : usage[1], co2Usage : usage[2],
             weatherLow : weather[0], weatherAverage : weather[1], weatherHigh : weather[2]
         });
     }
@@ -39,8 +39,8 @@ C3.data.daily = C3.data.createDataPoints(30);
 C3.data.monthly = C3.data.createDataPoints(12);
 
 C3.data.annual = [
-    {type: "previous", spendingTotal: 60, spendingElectricity: 50, spendingGas: 10, electricityUsage : 60, gasUsage : 20, co2Usage : 10},
-    {type: "current", spendingTotal: 50, spendingElectricity: 42, spendingGas: 8, electricityUsage : 50, gasUsage : 10, co2Usage : 5},
-    {type: "efficient", spendingTotal: 30, spendingElectricity: 25, spendingGas: 5, electricityUsage : 30, gasUsage : 30, co2Usage : 0},
-    {type: "average", spendingTotal: 80, spendingElectricity: 60, spendingGas: 20, electricityUsage : 80, gasUsage : 70, co2Usage : 25}
+    {type: "previous", spendingTotal: 60, spendingElectricity: 50, spendingGas: 10, electricityUsage : 55, gasUsage : 20, co2Usage : 10},
+    {type: "current", spendingTotal: 50, spendingElectricity: 42, spendingGas: 8, electricityUsage : 45, gasUsage : 10, co2Usage : 5},
+    {type: "efficient", spendingTotal: 30, spendingElectricity: 25, spendingGas: 5, electricityUsage : 25, gasUsage : 30, co2Usage : 0},
+    {type: "average", spendingTotal: 80, spendingElectricity: 60, spendingGas: 20, electricityUsage : 75, gasUsage : 70, co2Usage : 25}
 ];

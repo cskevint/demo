@@ -34,8 +34,19 @@ Ext.define("C3.ui.graph.PointDataChart", {
                 yFieldKey: "spendingGas"
             }));
 
-        } else {
-            console.log("must be showing non-spending data");
+        } else if(me.filterData.usage == "electricity") {
+            series.push(me.createSeries({
+                yFieldKey: "electricityUsage"
+            }));
+
+        } else if(me.filterData.usage == "gas") {
+            series.push(me.createSeries({
+                yFieldKey: "gasUsage"
+            }));
+        } else if(me.filterData.usage == "co2") {
+            series.push(me.createSeries({
+                yFieldKey: "co2Usage"
+            }));
         }
 
         if(me.filterData.previous) {

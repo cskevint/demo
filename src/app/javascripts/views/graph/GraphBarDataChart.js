@@ -5,6 +5,7 @@ Ext.define("C3.ui.graph.BarDataChart", {
      * Default filterData object used to create the series and visuals for the monthly chart.
      */
     filterData : {
+        usage: "spending",
         spendType : "total",
         previous : false
     },
@@ -12,11 +13,22 @@ Ext.define("C3.ui.graph.BarDataChart", {
     initComponent : function() {
         var me = this;
 
-        var yAxisField = "spendingTotal";
-        if(me.filterData.spendType == "electricity") {
-            yAxisField = "spendingElectricity";
-        } else if(me.filterData.spendType == "gas") {
-            yAxisField = "spendingGas";
+        var yAxisField;
+
+        if(me.filterData.usage == "spending") {
+            if(me.filterData.spendType == "electricity") {
+                yAxisField = "spendingElectricity";
+            } else if(me.filterData.spendType == "gas") {
+                yAxisField = "spendingGas";
+            } else {
+                yAxisField = "spendingTotal";
+            }
+        } else if(me.filterData.usage == "electricity") {
+            yAxisField = "electricityUsage";
+        } else if(me.filterData.usage == "gas") {
+            yAxisField = "gasUsage";
+        } else if(me.filterData.usage == "co2") {
+            yAxisField = "co2Usage";
         }
 
         if(!me.filterData.previous) {
