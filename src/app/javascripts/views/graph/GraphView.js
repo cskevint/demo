@@ -31,7 +31,7 @@ Ext.define("C3.ui.graph.View", {
 
         me.chartHeight = me.height - me.switcher.height - me.toolbar.height;
 
-        me.annualChart = new C3.ui.graph.BarDataChart({
+        me.chart = new C3.ui.graph.BarDataChart({
             width : me.width,
             height : me.chartHeight,
             store: new C3.store.graph.BarData({
@@ -43,7 +43,7 @@ Ext.define("C3.ui.graph.View", {
             width: me.width,
             height: me.height,
             dockedItems: [ me.switcher, me.toolbar ],
-            items: me.annualChart
+            items: me.chart
         });
 
         me.switcher.on({
@@ -58,7 +58,7 @@ Ext.define("C3.ui.graph.View", {
         });
 
         me.toolbar.on({
-            filterChange : function(){
+            filter : function(){
                 me.renderChart();
             }
         });
@@ -71,21 +71,21 @@ Ext.define("C3.ui.graph.View", {
 
     renderChart : function() {
         var me = this, filterData = me.getWrappedFilterData();
-        me.panel.items.clear();
+        me.panel.remove(me.chart, true);
 
         if(filterData.usage == "buildingUse") {
-            me.donutChart = new C3.ui.graph.DonutDataChart({
+            me.chart = new C3.ui.graph.DonutDataChart({
                 width : me.width,
                 height : me.chartHeight,
                 filterData : filterData
             });
 
-            me.panel.items.add("donut", me.donutChart);
+            me.panel.add(me.chart);
 
         } else {
             if(filterData.grainType == "annual") {
 
-                me.annualChart = new C3.ui.graph.BarDataChart({
+                me.chart = new C3.ui.graph.BarDataChart({
                     width : me.width,
                     height : me.chartHeight,
                     filterData : filterData,
@@ -94,11 +94,11 @@ Ext.define("C3.ui.graph.View", {
                     })
                 });
 
-                me.panel.items.add("annual", me.annualChart);
+                me.panel.add(me.chart);
 
             } else if(filterData.grainType == "monthly") {
 
-                var monthlyChart = new C3.ui.graph.PointDataChart({
+                me.chart = new C3.ui.graph.PointDataChart({
                     width : me.width,
                     height : me.chartHeight,
                     store: new C3.store.graph.PointData({
@@ -106,11 +106,12 @@ Ext.define("C3.ui.graph.View", {
                     }),
                     filterData : me.getWrappedFilterData()
                 });
-                me.panel.items.add("monthly", monthlyChart);
+
+                me.panel.add(me.chart);
 
             } else if(filterData.grainType == "daily") {
 
-                var dailyChart = new C3.ui.graph.PointDataChart({
+                me.chart = new C3.ui.graph.PointDataChart({
                     width : me.width,
                     height : me.chartHeight,
                     store: new C3.store.graph.PointData({
@@ -118,12 +119,10 @@ Ext.define("C3.ui.graph.View", {
                     }),
                     filterData : me.getWrappedFilterData()
                 });
-                me.panel.items.add("monthly", dailyChart);
+                me.panel.add(me.chart);
 
             }
         }
-
-        me.panel.doLayout();
     },
 
     getWrappedFilterData : function() {

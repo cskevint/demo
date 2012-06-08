@@ -8,85 +8,68 @@ Ext.define("C3.ui.graph.Toolbar", {
         var me = this;
         me.callParent(arguments);
 
+        var clickHandler = function() {
+            me.fireEvent("filter", me.getFilterData());
+        };
+
+        /* Left Buttons */
+
         me.annual = new C3.ui.graph.FilterButton({
             text: C3.i18n.current.annual,
             toggleGroup: "dateType",
-            handler: function() {
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
         me.monthly = new C3.ui.graph.FilterButton({
             text: C3.i18n.current.monthly,
             toggleGroup: "dateType",
-            handler: function(){
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
         me.daily = new C3.ui.graph.FilterButton({
             text: C3.i18n.current.daily,
             toggleGroup: "dateType",
-            handler: function() {
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
-
-
-
+        /* Center Buttons */
 
         me.total = new C3.ui.graph.FilterButton({
             text: C3.i18n.current.total,
             toggleGroup: "spendType",
-            handler: function() {
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
         me.electricity = new C3.ui.graph.FilterButton({
             text: C3.i18n.current.electricity,
             toggleGroup: "spendType",
-            handler: function() {
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
         me.gas = new C3.ui.graph.FilterButton({
             text: C3.i18n.current.gas,
             toggleGroup: "spendType",
-            handler: function() {
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
-
-
-
+        /* Right Buttons */
 
         me.previous = new C3.ui.graph.OverlayButton({
             text: C3.i18n.current.previousPeriod,
-            handler: function() {
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
         me.actions = new C3.ui.graph.OverlayButton({
             text: C3.i18n.current.planActions,
-            handler: function() {
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
         me.weather = new C3.ui.graph.OverlayButton({
             text: C3.i18n.current.weather,
-            handler: function() {
-                me.fireEvent("filterChange", me.getFilterData());
-            }
+            handler: clickHandler
         });
 
-
-
+        /* Layout */
 
         me.toolbar = new Ext.toolbar.Toolbar({
             width: me.width,
