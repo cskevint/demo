@@ -31,20 +31,6 @@
     <script type="text/javascript">
         Ext.ns("C3.data");
 
-        // Generate Annual Data
-
-        C3.data.annual = new Ext.data.JsonStore({
-            fields: ["name", "total", "electricity", "gas"],
-            data: [
-                {name: "previous", total: 60, electricity: 50, gas: 10},
-                {name: "current", total: 50, electricity: 42, gas: 8},
-                {name: "efficient", total: 30, electricity: 25, gas: 5},
-                {name: "average", total: 80, electricity: 60, gas: 20}
-            ]
-        });
-
-        // Generate Monthly Data
-
         C3.data.get3Randoms = function(min, max) {
             if(!min) min = 0;
             if(!max) max = 100;
@@ -79,13 +65,22 @@
             return result;
         };
 
-        C3.data.monthly = C3.data.createDataPoints(12);
         C3.data.daily = C3.data.createDataPoints(30);
+
+        C3.data.monthly = C3.data.createDataPoints(12);
+
+        C3.data.annual = [
+            {type: "previous", total: 60, electricity: 50, gas: 10},
+            {type: "current", total: 50, electricity: 42, gas: 8},
+            {type: "efficient", total: 30, electricity: 25, gas: 5},
+            {type: "average", total: 80, electricity: 60, gas: 20}
+        ];
 
         Ext.onReady(function () {
             new C3.ui.graph.View({
                 dailyRawData : C3.data.daily,
                 monthlyRawData : C3.data.monthly,
+                annualRawData : C3.data.annual,
                 renderTo : "chart"
             });
         });

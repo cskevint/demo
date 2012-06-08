@@ -20,7 +20,7 @@ Ext.define("C3.ui.graph.BarDataChart", {
         }
 
         if(!me.filterData.previous) {
-            me.store.filter("name",/(current|average|efficient)/);
+            me.store.filter("type",/(current|average|efficient)/);
         } else {
             me.store.clearFilter();
         }
