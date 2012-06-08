@@ -12,11 +12,11 @@ Ext.define("C3.ui.graph.BarDataChart", {
     initComponent : function() {
         var me = this;
 
-        var yAxisField = "total";
+        var yAxisField = "spendingTotal";
         if(me.filterData.spendType == "electricity") {
-            yAxisField = "electricity";
+            yAxisField = "spendingElectricity";
         } else if(me.filterData.spendType == "gas") {
-            yAxisField = "gas";
+            yAxisField = "spendingGas";
         }
 
         if(!me.filterData.previous) {

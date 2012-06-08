@@ -3,8 +3,12 @@ Ext.define("C3.data.graph.BarData", {
     fields: [
         {name: 'type', type: 'string'},
 
-        {name: 'total', type: 'int'},
-        {name: 'electricity', type: 'int'},
-        {name: 'gas', type: 'int'}
+        {name: 'spendingTotal', type: 'int'},
+        {name: 'spendingElectricity', type: 'int'},
+        {name: 'spendingGas', type: 'int'},
+
+        {name: 'electricityUsage', type: 'int'},
+        {name: 'gasUsage', type: 'int'},
+        {name: 'co2Usage', type: 'int'}
     ]
 });
