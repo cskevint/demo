@@ -7,37 +7,41 @@ Ext.define("C3.ui.graph.View", {
 
     annualRawData : null,
 
+    width : 800,
+
+    height : 400,
+
+    chartHeight : 0,
+
     initComponent : function() {
         var me = this;
         me.callParent(arguments);
 
-        var width = 800, height = 400, chartHeight = 0;
-
         me.switcher = new C3.ui.graph.Switcher({
-            width : width,
+            width : me.width,
             height : 40,
             dock: "top"
         });
 
         me.toolbar = new C3.ui.graph.Toolbar({
-            width : width,
+            width : me.width,
             height : 28,
             dock: "top"
         });
 
-        chartHeight = height - me.switcher.height - me.toolbar.height;
+        me.chartHeight = me.height - me.switcher.height - me.toolbar.height;
 
         me.annualChart = new C3.ui.graph.BarDataChart({
-            width : width,
-            height : chartHeight,
+            width : me.width,
+            height : me.chartHeight,
             store: new C3.store.graph.BarData({
                 data : me.annualRawData
             })
         });
 
         me.panel = new Ext.panel.Panel({
-            width: width,
-            height: height,
+            width: me.width,
+            height: me.height,
             dockedItems: [ me.switcher, me.toolbar ],
             items: me.annualChart
         });
@@ -49,61 +53,72 @@ Ext.define("C3.ui.graph.View", {
                 } else {
                     me.toolbar.setSpendTypeEnabled(false);
                 }
+                me.renderChart();
             }
         });
 
         me.toolbar.on({
-            filterChange : function(event){
-                me.panel.items.clear();
-
-                if(event.grainType == "annual") {
-
-                    me.annualChart = new C3.ui.graph.BarDataChart({
-                        width : width,
-                        height : chartHeight,
-                        filterData : me.toolbar.getFilterData(),
-                        store: new C3.store.graph.BarData({
-                            data : me.annualRawData
-                        })
-                    });
-
-                    me.panel.items.add("annual", me.annualChart);
-
-                } else if(event.grainType == "monthly") {
-
-                    var monthlyChart = new C3.ui.graph.PointDataChart({
-                        width : width,
-                        height : chartHeight,
-                        store: new C3.store.graph.PointData({
-                            data : me.monthlyRawData
-                        }),
-                        filterData : me.toolbar.getFilterData()
-                    });
-                    me.panel.items.add("monthly", monthlyChart);
-
-                } else if(event.grainType == "daily") {
-
-                    var dailyChart = new C3.ui.graph.PointDataChart({
-                        width : width,
-                        height : chartHeight,
-                        store: new C3.store.graph.PointData({
-                            data : me.dailyRawData
-                        }),
-                        filterData : me.toolbar.getFilterData()
-                    });
-                    me.panel.items.add("monthly", dailyChart);
-
-                }
-
-                me.panel.doLayout();
+            filterChange : function(){
+                me.renderChart();
             }
         });
     },
 
     onRender: function() {
-        var me = this;
-        me.callParent(arguments);
+        this.callParent(arguments);
+        this.panel.render(this.el);
+    },
 
-        me.panel.render(this.el);
+    renderChart : function() {
+        var me = this, filterData = me.getWrappedFilterData();
+        me.panel.items.clear();
+
+        if(filterData.grainType == "annual") {
+
+            me.annualChart = new C3.ui.graph.BarDataChart({
+                width : me.width,
+                height : me.chartHeight,
+                filterData : filterData,
+                store: new C3.store.graph.BarData({
+                    data : me.annualRawData
+                })
+            });
+
+            me.panel.items.add("annual", me.annualChart);
+
+        } else if(filterData.grainType == "monthly") {
+
+            var monthlyChart = new C3.ui.graph.PointDataChart({
+                width : me.width,
+                height : me.chartHeight,
+                store: new C3.store.graph.PointData({
+                    data : me.monthlyRawData
+                }),
+                filterData : me.getWrappedFilterData()
+            });
+            me.panel.items.add("monthly", monthlyChart);
+
+        } else if(filterData.grainType == "daily") {
+
+            var dailyChart = new C3.ui.graph.PointDataChart({
+                width : me.width,
+                height : me.chartHeight,
+                store: new C3.store.graph.PointData({
+                    data : me.dailyRawData
+                }),
+                filterData : me.getWrappedFilterData()
+            });
+            me.panel.items.add("monthly", dailyChart);
+
+        }
+
+        me.panel.doLayout();
+    },
+
+    getWrappedFilterData : function() {
+        var me = this;
+        var result = me.toolbar.getFilterData();
+        result.usage = me.switcher.getSelectedValue();
+        return result;
     }
 });

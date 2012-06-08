@@ -1,6 +1,8 @@
 Ext.define("C3.ui.graph.Switcher", {
     extend : "Ext.Component",
 
+    eventTypes : ["spending", "electricity", "gas", "co2", "buildingUse"],
+
     initComponent : function(config) {
         var me = this;
         me.callParent(arguments);
@@ -38,13 +40,13 @@ Ext.define("C3.ui.graph.Switcher", {
 
         me.buildingUse.addCls("last");
 
-        Ext.each(["spending","electricity","gas","co2","buildingUse"],function(o){
+        Ext.each(me.eventTypes, function(o){
             me[o].on({
                 switch : function(event) {
                     me.fireEvent("switch", event);
                 }
             });
-        })
+        });
     },
 
     onRender: function() {
@@ -67,5 +69,15 @@ Ext.define("C3.ui.graph.Switcher", {
             ],
             renderTo: this.el
         });
+    },
+
+    getSelectedValue : function() {
+        var me = this, value = me.eventTypes[0];
+        Ext.each(me.eventTypes, function(o){
+            if(me[o].pressed) {
+                value = me[o].eventType;
+            }
+        });
+        return value;
     }
 });
